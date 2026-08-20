@@ -2,6 +2,8 @@ import { BenefitBar } from "@/components/benefit-bar";
 import { Hero } from "@/components/hero";
 import { PromoTicker } from "@/components/promo-ticker";
 import { SiteHeader } from "@/components/site-header";
+import { RitualSteps } from "@/components/ritual-steps";
+import { SiteFooter } from "@/components/site-footer";
 import { WellnessRitual } from "@/components/wellness-ritual";
 
 export default function Home() {
@@ -17,7 +19,9 @@ export default function Home() {
           <BenefitBar />
         </div>
         <WellnessRitual />
+        <RitualSteps />
       </main>
+      <SiteFooter />
     </>
   );
 }
