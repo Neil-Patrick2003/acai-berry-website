@@ -171,6 +171,141 @@ export function TikTokIcon(props: IconProps) {
   );
 }
 
+export function MinusIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M5 12h14" />
+    </svg>
+  );
+}
+
+/** Single-serve stick pack, used beside the pouch/sachet counts. */
+export function SachetIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.7}
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M6.6 20.4 3.6 17.4 17.4 3.6l3 3z" />
+      <path d="m5.6 15.4 3 3M8.4 12.6l3 3M11.2 9.8l3 3M14 7l3 3" strokeWidth={1} />
+    </svg>
+  );
+}
+
+/** Parcel inside a recycle loop — the subscribe-and-save offer. */
+export function SubscribeIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={3}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M39.5 15.5a18 18 0 0 0-30-3" />
+      <path d="M8.5 15.5v-8m0 8h8" />
+      <path d="M8.5 32.5a18 18 0 0 0 30 3" />
+      <path d="M39.5 32.5v8m0-8h-8" />
+      <path d="M24 15.5 32 20v9l-8 4.5L16 29v-9z" />
+      <path d="M16 20l8 4.5L32 20M24 24.5V33.5" strokeWidth={2} />
+    </svg>
+  );
+}
+
+export function GiftIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M20 10c-4-4-9-2-9 2s5 4 9 4m8-6c4-4 9-2 9 2s-5 4-9 4"
+        stroke="currentColor"
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+      <rect x="7" y="18" width="34" height="8" fill="currentColor" />
+      <rect x="10" y="27" width="28" height="16" fill="currentColor" />
+      <rect x="21" y="18" width="6" height="25" fill="#fff" opacity={0.55} />
+    </svg>
+  );
+}
+
+export function SparkleIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0Z" />
+    </svg>
+  );
+}
+
+/** Gold starburst worn by the best-selling bundle. */
+export function BestSellerBadge({ className = "" }: { className?: string }) {
+  const points = Array.from({ length: 32 }, (_, i) => {
+    const angle = (i / 32) * Math.PI * 2;
+    const radius = i % 2 === 0 ? 50 : 43;
+    return `${(50 + radius * Math.cos(angle)).toFixed(1)} ${(50 + radius * Math.sin(angle)).toFixed(1)}`;
+  }).join("L");
+
+  return (
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={className}>
+      <defs>
+        <linearGradient id="bs-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#e7cf86" />
+          <stop offset="45%" stopColor="#c9a44e" />
+          <stop offset="100%" stopColor="#a4863f" />
+        </linearGradient>
+      </defs>
+      <path d={`M${points}Z`} fill="url(#bs-gold)" />
+      <circle
+        cx="50"
+        cy="50"
+        r="38"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1.4"
+        strokeDasharray="2 4"
+        opacity="0.85"
+      />
+      <text
+        x="50"
+        y="45"
+        textAnchor="middle"
+        fill="#fff"
+        fontSize="19"
+        fontWeight="900"
+        fontFamily="var(--font-sans)"
+      >
+        BEST
+      </text>
+      <text
+        x="50"
+        y="65"
+        textAnchor="middle"
+        fill="#fff"
+        fontSize="15"
+        fontWeight="900"
+        fontFamily="var(--font-sans)"
+      >
+        SELLER
+      </text>
+    </svg>
+  );
+}
+
 export function MenuIcon(props: IconProps) {
   return (
     <svg

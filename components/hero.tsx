@@ -23,14 +23,15 @@ export function Hero() {
       {/* Açaí berries bleeding in from the lower-left corner */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 hidden h-[80%] w-40 opacity-95 lg:block xl:w-52 [mask-composite:intersect] [mask-image:linear-gradient(to_right,#000_35%,transparent_100%),linear-gradient(to_bottom,transparent_0%,#000_30%)]"
+        className="pointer-events-none absolute -bottom-4 -left-6 -z-10 hidden w-52 opacity-30 lg:block xl:w-64 [mask-image:linear-gradient(to_bottom,transparent_0%,#000_24%)]"
       >
         <Image
           src="/hero/berries.png"
           alt=""
-          fill
-          sizes="208px"
-          className="object-cover object-bottom-left"
+          width={415}
+          height={601}
+          sizes="(min-width: 1280px) 224px, 176px"
+          className="h-auto w-full"
         />
       </div>
 

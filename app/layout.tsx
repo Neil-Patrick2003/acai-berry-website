@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, Playfair_Display } from "next/font/google";
+import { Figtree, Great_Vibes, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 /* Display face — wordmark and hero headline */
@@ -16,6 +16,14 @@ const figtree = Figtree({
   display: "swap",
 });
 
+/* Script accent — the "Perfect Glow" lockup */
+const greatVibes = Great_Vibes({
+  variable: "--font-great-vibes",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "beyou — Açaí Berry Glow | The beauty drink you will actually keep",
   description:
@@ -26,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${figtree.variable} h-full antialiased`}
+      className={`${playfair.variable} ${figtree.variable} ${greatVibes.variable} h-full antialiased`}
     >
       <body className="flex min-h-dvh flex-col bg-shell font-sans text-ink">
         {children}

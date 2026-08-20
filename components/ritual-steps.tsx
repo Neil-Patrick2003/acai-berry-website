@@ -119,13 +119,14 @@ export function RitualSteps() {
   return (
     <section className="bg-ritual-ground relative isolate overflow-hidden pb-28 sm:pb-32 lg:pb-40">
       {/* Berry, pouch and glass composite anchored to the right edge */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-[72%] opacity-20 [mask-image:linear-gradient(to_right,transparent_0%,#000_18%)] sm:w-[60%] lg:w-[38%] lg:max-w-[36rem] lg:opacity-100">
+      <div className="pointer-events-none absolute right-0 bottom-0 -z-10 w-[80%] translate-x-1/4 opacity-25 sm:w-[58%] lg:w-[34%] lg:opacity-100 xl:w-[38%] 2xl:w-[42%]">
         <Image
           src="/steps/composite.png"
           alt=""
-          fill
-          sizes="(min-width: 1024px) 38vw, 72vw"
-          className="object-cover object-right"
+          width={484}
+          height={516}
+          sizes="(min-width: 1024px) 38vw, 80vw"
+          className="h-auto w-full -rotate-12"
         />
       </div>
 
@@ -159,7 +160,7 @@ export function RitualSteps() {
             <ul className="mt-6 flex flex-col gap-3">
               {FAQS.map((faq) => (
                 <li key={faq.question}>
-                  <details className="group rounded-3xl border border-brand-700/45 bg-white/55 px-5 open:bg-white/80 sm:px-6">
+                  <details className="group rounded-3xl border border-brand-700/45 bg-white/85 px-5 open:bg-white/95 sm:px-6">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-3.5 font-display text-sm font-semibold text-brand-700 sm:text-base [&::-webkit-details-marker]:hidden">
                       {faq.question}
                       <PlusIcon className="size-4 shrink-0 transition-transform duration-200 group-open:rotate-45" />
