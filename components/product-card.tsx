@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { BestSellerBadge, SachetIcon } from "@/components/icons";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
+import { BuyNowButton } from "@/components/cart/buy-now-button";
 
 export type Product = {
   slug: string;
@@ -54,12 +54,15 @@ export function ProductCard({ product }: { product: Product }) {
           {product.contents}
         </p>
 
-        <Link
-          href={`/products/${product.slug}/checkout`}
-          className="mt-4 flex h-11 w-full max-w-[15rem] items-center justify-center rounded-full bg-brand-600 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-700"
-        >
-          Order now
-        </Link>
+        <BuyNowButton
+          item={{
+            id: product.slug,
+            name: product.name,
+            price: product.price,
+            meta: product.contents,
+            image: product.image,
+          }}
+        />
 
         <AddToCartButton
           item={{
