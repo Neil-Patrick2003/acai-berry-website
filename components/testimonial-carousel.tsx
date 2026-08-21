@@ -90,7 +90,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
           {item.headline}
         </h3>
 
-        <p className="mt-3 text-[0.7rem] leading-relaxed font-bold text-brand-700 sm:text-xs">
+        <p className="mt-3 text-[0.8rem] leading-relaxed font-bold text-brand-700 sm:text-[0.82rem]">
           {item.quote}
         </p>
 

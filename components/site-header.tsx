@@ -1,12 +1,8 @@
 import Link from "next/link";
-import { MenuIcon, SearchIcon } from "@/components/icons";
+import { SearchIcon } from "@/components/icons";
+import { MobileMenu } from "@/components/mobile-menu";
 import { CartButton } from "@/components/cart/cart-button";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/", active: true },
-  { label: "Products", href: "/products", active: false },
-  { label: "About us", href: "/about", active: false },
-];
+import { SiteNav } from "@/components/site-nav";
 
 export function SiteHeader() {
   return (
@@ -19,23 +15,7 @@ export function SiteHeader() {
           beyou
         </Link>
 
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-9">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  aria-current={link.active ? "page" : undefined}
-                  className={`text-[0.95rem] font-medium tracking-wide text-brand-700 uppercase underline-offset-[6px] transition-colors hover:text-brand-600 hover:underline ${
-                    link.active ? "underline" : ""
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <SiteNav />
 
         <form
           role="search"
@@ -66,13 +46,7 @@ export function SiteHeader() {
         <div className="ml-auto flex items-center gap-4 md:ml-0 lg:gap-7">
           <CartButton />
 
-          <button
-            type="button"
-            aria-label="Open menu"
-            className="text-brand-700 lg:hidden"
-          >
-            <MenuIcon className="size-7" />
-          </button>
+          <MobileMenu />
         </div>
       </div>
     </header>

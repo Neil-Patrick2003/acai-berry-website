@@ -88,7 +88,7 @@ export function CartDrawer() {
             type="button"
             onClick={closeCart}
             aria-label="Close cart"
-            className="grid size-9 place-items-center rounded-full text-brand-700 transition-colors hover:bg-brand-700/10"
+            className="grid size-11 place-items-center rounded-full text-brand-700 transition-colors hover:bg-brand-700/10"
           >
             <PlusIcon className="size-5 rotate-45" />
           </button>

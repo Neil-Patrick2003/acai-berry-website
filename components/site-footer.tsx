@@ -88,7 +88,7 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="block text-brand-700 transition-opacity hover:opacity-70"
+                    className="-m-1.5 block p-1.5 text-brand-700 transition-opacity hover:opacity-70"
                   >
                     <Icon className="size-8" />
                   </a>
@@ -99,7 +99,7 @@ export function SiteFooter() {
                   href="https://tiktok.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-1 text-brand-700 transition-opacity hover:opacity-70"
+                  className="-m-1.5 flex items-center gap-1 p-1.5 text-brand-700 transition-opacity hover:opacity-70"
                 >
                   <TikTokIcon className="size-7" />
                   <span className="text-xl font-black tracking-tight">
@@ -123,12 +123,12 @@ export function SiteFooter() {
               >
                 {column.heading}
               </h2>
-              <ul className="mt-4 flex flex-col gap-2.5">
+              <ul className="mt-1 flex flex-col sm:mt-4 sm:gap-2.5">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-brand-700 underline underline-offset-4 transition-colors hover:text-brand-500"
+                      className="inline-flex min-h-11 items-center text-sm text-brand-700 underline underline-offset-4 transition-colors hover:text-brand-500 sm:min-h-0"
                     >
                       {link.label}
                     </Link>
@@ -158,7 +158,7 @@ export function SiteFooter() {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="text-sm text-brand-700 transition-colors hover:text-brand-500"
+                  className="inline-flex min-h-11 items-center text-sm text-brand-700 transition-colors hover:text-brand-500 sm:min-h-0"
                 >
                   {link.label}
                 </Link>
@@ -172,7 +172,7 @@ export function SiteFooter() {
                 key={payment.label}
                 title={payment.label}
                 style={{ color: payment.color }}
-                className="grid h-6 w-9 place-items-center rounded-[3px] bg-white text-[0.5rem] font-black tracking-tight shadow-[0_0_0_1px_rgb(0_0_0/0.08)]"
+                className="grid h-7 w-10 place-items-center rounded-[3px] bg-white text-[0.56rem] font-black tracking-tight shadow-[0_0_0_1px_rgb(0_0_0/0.08)]"
               >
                 {payment.short}
                 <span className="sr-only">{payment.label}</span>

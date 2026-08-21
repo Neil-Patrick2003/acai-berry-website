@@ -13,12 +13,12 @@ export function ProductFilters() {
         <ul className="mt-1 flex flex-col gap-1.5">
           {AVAILABILITY.map((option) => (
             <li key={option}>
-              <label className="flex cursor-pointer items-center gap-2.5 text-sm">
+              <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm sm:min-h-0 sm:py-1">
                 <input
                   type="checkbox"
                   name="availability"
                   value={option}
-                  className="size-4 appearance-none rounded-[2px] border border-neutral-500 checked:border-brand-700 checked:bg-brand-700"
+                  className="size-5 shrink-0 appearance-none rounded-[3px] border border-neutral-500 checked:border-brand-700 checked:bg-brand-700"
                 />
                 {option}
               </label>
