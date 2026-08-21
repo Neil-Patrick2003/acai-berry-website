@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { BestSellerBadge, SachetIcon } from "@/components/icons";
-import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { BuyNowButton } from "@/components/cart/buy-now-button";
 
 export type Product = {
@@ -64,15 +63,6 @@ export function ProductCard({ product }: { product: Product }) {
           }}
         />
 
-        <AddToCartButton
-          item={{
-            id: product.slug,
-            name: product.name,
-            price: product.price,
-            meta: product.contents,
-            image: product.image,
-          }}
-        />
       </div>
     </article>
   );

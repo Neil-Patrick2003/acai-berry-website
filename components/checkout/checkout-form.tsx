@@ -5,84 +5,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { CheckDiscIcon } from "@/components/icons";
 import { formatPeso, useCart, type CartLine } from "@/components/cart/cart-context";
-
-type Customer = {
-  fullName: string;
-  phone: string;
-  address: string;
-  landmark: string;
-};
-
-type PlacedOrder = {
-  reference: string;
-  placedAt: string;
-  customer: Customer;
-  paymentMethod: "cash-on-delivery";
-  items: {
-    id: string;
-    name: string;
-    quantity: number;
-    unitPrice: number;
-    lineTotal: number;
-  }[];
-  subtotal: number;
-  shippingFee: number;
-  total: number;
-};
-
-const EMPTY: Customer = { fullName: "", phone: "", address: "", landmark: "" };
-
-const FIELDS = [
-  {
-    name: "fullName" as const,
-    label: "Full name",
-    placeholder: "Juan Dela Cruz",
-    autoComplete: "name",
-    hint: "First and last name, as it should appear on the parcel.",
-  },
-  {
-    name: "phone" as const,
-    label: "Phone number",
-    placeholder: "0917 123 4567",
-    autoComplete: "tel",
-    inputMode: "tel" as const,
-    hint: "Our courier will text or call this number before delivery.",
-  },
-  {
-    name: "address" as const,
-    label: "Complete address",
-    placeholder: "House / unit no., street, barangay, city, province, ZIP",
-    autoComplete: "street-address",
-    multiline: true,
-    hint: "Include house or unit number, street, barangay, city, province and ZIP.",
-  },
-  {
-    name: "landmark" as const,
-    label: "Landmark",
-    placeholder: "Beside the covered court, green gate",
-    multiline: true,
-    hint: "Anything that helps the rider find you.",
-  },
-];
-
-/** Accepts 09XXXXXXXXX, +639XXXXXXXXX and the same with spaces or dashes. */
-function validate(values: Customer) {
-  const errors: Partial<Record<keyof Customer, string>> = {};
-  if (values.fullName.trim().length < 2) {
-    errors.fullName = "Please enter your full name.";
-  }
-  const digits = values.phone.replace(/[^\d+]/g, "");
-  if (!/^(\+?63|0)9\d{9}$/.test(digits)) {
-    errors.phone = "Enter a valid mobile number, e.g. 0917 123 4567.";
-  }
-  if (values.address.trim().length < 12) {
-    errors.address = "Please give the complete delivery address.";
-  }
-  if (values.landmark.trim().length < 3) {
-    errors.landmark = "Please add a nearby landmark.";
-  }
-  return errors;
-}
+import {
+  EMPTY_CUSTOMER,
+  PH_DIAL_CODE,
+  buildFullAddress,
+  formatPhone,
+  normalisePhone,
+  validateCustomer,
+  type Customer,
+  type OrderPayload,
+} from "@/lib/order";
+import { AddressFields } from "@/components/checkout/address-fields";
 
 function OrderLines({ lines }: { lines: CartLine[] }) {
   return (
@@ -140,9 +73,11 @@ function Totals({ subtotal }: { subtotal: number }) {
 
 export function CheckoutForm() {
   const { lines, subtotal, hydrated, clear } = useCart();
-  const [values, setValues] = useState<Customer>(EMPTY);
+  const [values, setValues] = useState<Customer>(EMPTY_CUSTOMER);
   const [errors, setErrors] = useState<Partial<Record<keyof Customer, string>>>({});
-  const [order, setOrder] = useState<PlacedOrder | null>(null);
+  const [order, setOrder] = useState<OrderPayload | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   /* ---- Thank you ------------------------------------------------------- */
   if (order) {
@@ -196,11 +131,11 @@ export function CheckoutForm() {
               {order.customer.fullName}
             </span>
             <br />
-            {order.customer.address}
+            {buildFullAddress(order.customer)}
             <br />
             <span className="text-xs">Landmark: {order.customer.landmark}</span>
             <br />
-            {order.customer.phone}
+            {formatPhone(order.customer.phone)}
           </address>
 
           <p className="mt-4 text-xs text-ink-soft">
@@ -250,23 +185,24 @@ export function CheckoutForm() {
 
         <form
           noValidate
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault();
-            const found = validate(values);
+            if (submitting) return;
+
+            const found = validateCustomer(values);
             setErrors(found);
             if (Object.keys(found).length > 0) {
-              const first = document.getElementById(Object.keys(found)[0]);
-              first?.focus();
+              document.getElementById(Object.keys(found)[0])?.focus();
               return;
             }
 
-            const placed: PlacedOrder = {
+            const payload: OrderPayload = {
               reference: `BEYOU-${Date.now().toString(36).toUpperCase()}`,
               placedAt: new Date().toISOString(),
               customer: {
+                ...values,
                 fullName: values.fullName.trim(),
-                phone: values.phone.trim(),
-                address: values.address.trim(),
+                street: values.street.trim(),
                 landmark: values.landmark.trim(),
               },
               paymentMethod: "cash-on-delivery",
@@ -282,11 +218,35 @@ export function CheckoutForm() {
               total: subtotal,
             };
 
-            // No backend yet — the order is logged for inspection.
-            console.log("[checkout] order placed", placed);
+            setSubmitting(true);
+            setSubmitError(null);
+            try {
+              const response = await fetch("/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+              });
+              const result: { ok?: boolean; errors?: string[] } = await response
+                .json()
+                .catch(() => ({}));
 
-            setOrder(placed);
-            clear();
+              if (!response.ok || !result.ok) {
+                setSubmitError(
+                  result.errors?.[0] ??
+                    "We could not place your order. Please try again.",
+                );
+                return;
+              }
+
+              setOrder(payload);
+              clear();
+            } catch {
+              setSubmitError(
+                "You appear to be offline. Check your connection and try again.",
+              );
+            } finally {
+              setSubmitting(false);
+            }
           }}
           className="mt-8"
         >
@@ -295,55 +255,91 @@ export function CheckoutForm() {
           </h2>
 
           <div className="mt-4 flex flex-col gap-5">
-            {FIELDS.map((field) => {
-              const error = errors[field.name];
-              const describedBy = `${field.name}-hint${error ? ` ${field.name}-error` : ""}`;
-              const shared = {
-                id: field.name,
-                name: field.name,
-                value: values[field.name],
-                placeholder: field.placeholder,
-                autoComplete: field.autoComplete,
-                "aria-invalid": error ? true : undefined,
-                "aria-describedby": describedBy,
-                onChange: (
-                  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-                ) => setValues((v) => ({ ...v, [field.name]: event.target.value })),
-                className: `w-full rounded-2xl border-2 bg-white/70 px-4 py-3 text-sm text-brand-700 placeholder:text-ink-soft/60 focus:bg-white focus:outline-none ${
-                  error ? "border-red-500" : "border-brand-700/40 focus:border-brand-600"
-                }`,
-              };
+            <div>
+              <label htmlFor="fullName" className="block text-sm font-bold text-brand-700">
+                Full name
+              </label>
+              <p id="fullName-hint" className="mt-0.5 text-xs text-ink-soft">
+                First and last name, as it should appear on the parcel.
+              </p>
+              <input
+                id="fullName"
+                name="fullName"
+                type="text"
+                autoComplete="name"
+                placeholder="Juan Dela Cruz"
+                value={values.fullName}
+                aria-invalid={errors.fullName ? true : undefined}
+                aria-describedby={`fullName-hint${errors.fullName ? " fullName-error" : ""}`}
+                onChange={(event) =>
+                  setValues((v) => ({ ...v, fullName: event.target.value }))
+                }
+                className={`mt-2 w-full rounded-2xl border-2 bg-white/70 px-4 py-3 text-sm text-brand-700 placeholder:text-ink-soft/60 focus:bg-white focus:outline-none ${
+                  errors.fullName ? "border-red-500" : "border-brand-700/40 focus:border-brand-600"
+                }`}
+              />
+              {errors.fullName && (
+                <p id="fullName-error" role="alert" className="mt-1.5 text-xs font-semibold text-red-600">
+                  {errors.fullName}
+                </p>
+              )}
+            </div>
 
-              return (
-                <div key={field.name}>
-                  <label
-                    htmlFor={field.name}
-                    className="block text-sm font-bold text-brand-700"
-                  >
-                    {field.label}
-                  </label>
-                  <p id={`${field.name}-hint`} className="mt-0.5 text-xs text-ink-soft">
-                    {field.hint}
+            <div>
+              <label htmlFor="phone" className="block text-sm font-bold text-brand-700">
+                Mobile number
+              </label>
+              <p id="phone-hint" className="mt-0.5 text-xs text-ink-soft">
+                Philippine mobile number — the rider will text or call before delivery.
+              </p>
+              <div
+                className={`mt-2 flex items-stretch overflow-hidden rounded-2xl border-2 bg-white/70 focus-within:bg-white ${
+                  errors.phone ? "border-red-500" : "border-brand-700/40 focus-within:border-brand-600"
+                }`}
+              >
+                <span className="flex shrink-0 items-center gap-1.5 border-r-2 border-brand-700/20 px-4 text-sm font-bold text-brand-700">
+                  <span aria-hidden="true">🇵🇭</span>
+                  {PH_DIAL_CODE}
+                </span>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="numeric"
+                  autoComplete="tel-national"
+                  maxLength={13}
+                  placeholder="917 123 4567"
+                  value={values.phone}
+                  aria-invalid={errors.phone ? true : undefined}
+                  aria-describedby={`phone-hint${errors.phone ? " phone-error" : ""}`}
+                  onChange={(event) =>
+                    setValues((v) => ({
+                      ...v,
+                      // Paste of 0917…, +63917… or 917… all end up as the national number.
+                      phone: normalisePhone(event.target.value).slice(0, 10),
+                    }))
+                  }
+                  className="w-full bg-transparent px-4 py-3 text-sm text-brand-700 placeholder:text-ink-soft/60 focus:outline-none"
+                />
+              </div>
+              {errors.phone ? (
+                <p id="phone-error" role="alert" className="mt-1.5 text-xs font-semibold text-red-600">
+                  {errors.phone}
+                </p>
+              ) : (
+                values.phone.length === 10 && (
+                  <p className="mt-1.5 text-xs text-ink-soft">
+                    We will text {formatPhone(values.phone)}
                   </p>
-                  <div className="mt-2">
-                    {field.multiline ? (
-                      <textarea {...shared} rows={3} />
-                    ) : (
-                      <input {...shared} type="text" inputMode={field.inputMode} />
-                    )}
-                  </div>
-                  {error && (
-                    <p
-                      id={`${field.name}-error`}
-                      role="alert"
-                      className="mt-1.5 text-xs font-semibold text-red-600"
-                    >
-                      {error}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+                )
+              )}
+            </div>
+
+            <AddressFields
+              values={values}
+              errors={errors}
+              onChange={(patch) => setValues((v) => ({ ...v, ...patch }))}
+            />
           </div>
 
           <h2 className="mt-9 font-sans text-sm font-extrabold tracking-wide text-brand-700 uppercase">
@@ -356,7 +352,6 @@ export function CheckoutForm() {
               name="payment"
               value="cod"
               defaultChecked
-              readOnly
               className="mt-0.5 size-5 shrink-0 accent-brand-600"
             />
             <label htmlFor="payment-cod" className="cursor-pointer">
@@ -370,11 +365,21 @@ export function CheckoutForm() {
             </label>
           </div>
 
+          {submitError && (
+            <p
+              role="alert"
+              className="mt-6 rounded-2xl border-2 border-red-500/60 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700"
+            >
+              {submitError}
+            </p>
+          )}
+
           <button
             type="submit"
-            className="mt-8 flex h-14 w-full items-center justify-center rounded-full bg-brand-600 text-sm font-bold tracking-[0.2em] text-white uppercase transition-colors hover:bg-brand-700"
+            disabled={submitting}
+            className="mt-6 flex h-14 w-full items-center justify-center rounded-full bg-brand-600 text-sm font-bold tracking-[0.2em] text-white uppercase transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Place order
+            {submitting ? "Placing order…" : "Place order"}
           </button>
         </form>
       </div>
