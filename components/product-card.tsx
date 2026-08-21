@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BestSellerBadge, CartIcon, SachetIcon } from "@/components/icons";
+import { BestSellerBadge, SachetIcon } from "@/components/icons";
+import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 
 export type Product = {
   slug: string;
@@ -60,13 +61,15 @@ export function ProductCard({ product }: { product: Product }) {
           Order now
         </Link>
 
-        <button
-          type="button"
-          className="mt-2.5 flex h-11 w-full max-w-[15rem] items-center justify-center gap-2 rounded-full border-2 border-brand-700/70 text-sm font-bold tracking-wide text-brand-700 uppercase transition-colors hover:bg-white/60"
-        >
-          <CartIcon className="size-5" />
-          Add to cart
-        </button>
+        <AddToCartButton
+          item={{
+            id: product.slug,
+            name: product.name,
+            price: product.price,
+            meta: product.contents,
+            image: product.image,
+          }}
+        />
       </div>
     </article>
   );

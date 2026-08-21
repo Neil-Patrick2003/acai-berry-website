@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CartIcon, MenuIcon, SearchIcon } from "@/components/icons";
+import { MenuIcon, SearchIcon } from "@/components/icons";
+import { CartButton } from "@/components/cart/cart-button";
 
 const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
@@ -63,13 +64,7 @@ export function SiteHeader() {
         </form>
 
         <div className="ml-auto flex items-center gap-4 md:ml-0 lg:gap-7">
-          <Link
-            href="/cart"
-            aria-label="Cart, 0 items"
-            className="text-brand-700 transition-opacity hover:opacity-75"
-          >
-            <CartIcon className="size-7 lg:size-8" />
-          </Link>
+          <CartButton />
 
           <button
             type="button"

@@ -2,12 +2,8 @@ import Image from "next/image";
 import { ProductCard, type Product } from "@/components/product-card";
 import { ProductFilters } from "@/components/product-filters";
 import { TornDivider } from "@/components/torn-divider";
-import {
-  CartIcon,
-  GiftIcon,
-  SparkleIcon,
-  SubscribeIcon,
-} from "@/components/icons";
+import { GiftIcon, SparkleIcon, SubscribeIcon } from "@/components/icons";
+import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 
 const PRODUCTS: Product[] = [
   {
@@ -42,16 +38,21 @@ const PRODUCTS: Product[] = [
 
 const OFFERS = [
   {
+    id: "subscribe-and-save",
     title: "Subscribe & Save",
-    price: "₱1,990+",
+    /** Entry price of the plan; the label carries the "+" for the tiers above it. */
+    amount: 1990,
+    priceLabel: "₱1,990+",
     detail: "3 Pouches — auto monthly",
     Icon: SubscribeIcon,
     tone: "lilac" as const,
     flag: "Best deal",
   },
   {
+    id: "gift-ritual",
     title: "Gift Rituals",
-    price: "₱990+",
+    amount: 990,
+    priceLabel: "₱990+",
     detail: "1–3 Pouches",
     Icon: GiftIcon,
     tone: "cream" as const,
@@ -118,7 +119,7 @@ export function ProductCollection() {
 
             {/* Recurring and gifting offers */}
             <ul className="mt-12 grid gap-6 lg:grid-cols-2">
-              {OFFERS.map(({ title, price, detail, Icon, tone, flag }) => (
+              {OFFERS.map(({ id, title, amount, priceLabel, detail, Icon, tone, flag }) => (
                 <li
                   key={title}
                   className={`relative flex items-center gap-4 rounded-[2.5rem] px-5 py-5 ring-6 ring-white sm:gap-6 sm:px-8 ${
@@ -136,20 +137,18 @@ export function ProductCollection() {
                       {title}
                     </h2>
                     <p className="text-2xl font-extrabold text-brand-600 sm:text-3xl">
-                      {price}
+                      {priceLabel}
                     </p>
                     <p className="mt-0.5 text-xs font-bold text-brand-700 sm:text-sm">
                       {detail}
                     </p>
                   </div>
 
-                  <button
-                    type="button"
-                    className="flex h-11 shrink-0 items-center gap-2 rounded-full bg-brand-600 px-5 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-700 sm:h-12 sm:px-7"
-                  >
-                    <CartIcon className="size-5" />
-                    Add
-                  </button>
+                  <AddToCartButton
+                    variant="solid"
+                    label="Add"
+                    item={{ id, name: title, price: amount, meta: detail }}
+                  />
 
                   {flag && (
                     <span className="absolute -top-3 right-8 rounded-md bg-brand-700 px-2.5 py-1 text-[0.6rem] leading-tight font-black tracking-wide text-white uppercase sm:text-[0.65rem]">

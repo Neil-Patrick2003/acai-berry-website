@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, Great_Vibes, Playfair_Display } from "next/font/google";
+import { CartProvider } from "@/components/cart/cart-context";
+import { CartDrawer } from "@/components/cart/cart-drawer";
 import "./globals.css";
 
 /* Display face — wordmark and hero headline */
@@ -37,7 +39,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${playfair.variable} ${figtree.variable} ${greatVibes.variable} h-full antialiased`}
     >
       <body className="flex min-h-dvh flex-col bg-shell font-sans text-ink">
-        {children}
+        <CartProvider>
+          {children}
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );
