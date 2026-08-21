@@ -47,6 +47,9 @@
   --font-sans: var(--font-figtree), "Figtree", ui-sans-serif, system-ui,
     -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-script: var(--font-great-vibes), "Great Vibes", cursive;
+  /* Casual brush script — the "Real People," lockup, distinct from the formal
+     copperplate used for "Perfect Glow". */
+  --font-brush: var(--font-kaushan), "Kaushan Script", cursive;
 
   /* Small caps / label type — used by nav, ticker, benefit bar */
   --text-label: 0.8125rem;
@@ -187,6 +190,32 @@
     #fdfaf6 86%,
     var(--color-sand) 100%
   );
+}
+
+/* Product band ground, traced from the reference: a light warm base that turns
+   golden toward the right, with a mauve shadow rising from the bottom and
+   pooling in the lower-right corner. */
+@utility bg-feature-ground {
+  background-image:
+    radial-gradient(
+      70% 80% at 100% 100%,
+      rgb(178 156 200 / 0.26) 0%,
+      rgb(178 156 200 / 0.1) 40%,
+      rgb(178 156 200 / 0) 70%
+    ),
+    linear-gradient(
+      to bottom,
+      rgb(196 184 192 / 0) 40%,
+      rgb(196 184 192 / 0.15) 76%,
+      rgb(196 184 192 / 0.3) 100%
+    ),
+    radial-gradient(
+      42% 58% at 100% 45%,
+      rgb(216 198 156 / 0.26) 0%,
+      rgb(216 198 156 / 0.1) 45%,
+      rgb(216 198 156 / 0) 72%
+    ),
+    linear-gradient(to right, #f2eeec 0%, #f1eae3 55%, #ede5d4 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

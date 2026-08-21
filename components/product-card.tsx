@@ -23,9 +23,9 @@ export function ProductCard({ product }: { product: Product }) {
         <Image
           src={product.image}
           alt={product.alt}
-          width={582}
-          height={516}
-          sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
+          width={1330}
+          height={1140}
+          sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 90vw"
           className="aspect-7/6 w-full rounded-3xl object-cover ring-4 ring-white"
         />
         {product.bestSeller && (

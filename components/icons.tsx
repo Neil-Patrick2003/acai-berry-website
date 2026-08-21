@@ -306,6 +306,75 @@ export function BestSellerBadge({ className = "" }: { className?: string }) {
   );
 }
 
+export function PeopleIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 34 24" fill="currentColor" aria-hidden="true" {...props}>
+      <circle cx="7" cy="7.6" r="4.1" />
+      <path d="M0 21.2c0-3.9 3.1-6.6 7-6.6s7 2.7 7 6.6z" />
+      <circle cx="27" cy="7.6" r="4.1" />
+      <path d="M20 21.2c0-3.9 3.1-6.6 7-6.6s7 2.7 7 6.6z" />
+      {/* Front figure, outlined in the pill colour so it separates from the pair behind */}
+      <g stroke="var(--color-brand-700)" strokeWidth="1.9" strokeLinejoin="round">
+        <circle cx="17" cy="6.4" r="5.2" />
+        <path d="M8.4 22.6c0-4.7 3.8-7.9 8.6-7.9s8.6 3.2 8.6 7.9z" />
+      </g>
+    </svg>
+  );
+}
+
+export function VerifiedIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.7}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9.4" />
+      <path d="m7.8 12.3 2.9 2.9 5.5-6" />
+    </svg>
+  );
+}
+
+export function ChevronIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="m15 5-7 7 7 7" />
+    </svg>
+  );
+}
+
+/** Outlined 66/99 quote mark used on the testimonial cards. */
+export function QuoteMarkIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 44 34"
+      fill="currentColor"
+      stroke="var(--color-brand-700)"
+      strokeWidth={1.6}
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M9.8 1.4c5 0 8.4 3.4 8.4 8.3 0 6.9-5.5 15.3-12.2 22.9-1.4 1.6-3.9-.3-2.8-2.1 3.2-5 5.6-9.6 6.3-13.2C5.2 17 1.6 13.7 1.6 9.7c0-4.9 3.3-8.3 8.2-8.3Z" />
+      <path d="M34.2 1.4c5 0 8.4 3.4 8.4 8.3 0 6.9-5.5 15.3-12.2 22.9-1.4 1.6-3.9-.3-2.8-2.1 3.2-5 5.6-9.6 6.3-13.2-4.3-1.3-7.9-4.6-7.9-8.6 0-4.9 3.3-8.3 8.2-8.3Z" />
+    </svg>
+  );
+}
+
 export function MenuIcon(props: IconProps) {
   return (
     <svg

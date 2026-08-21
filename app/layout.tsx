@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Figtree, Great_Vibes, Playfair_Display } from "next/font/google";
+import {
+  Figtree,
+  Great_Vibes,
+  Kaushan_Script,
+  Playfair_Display,
+} from "next/font/google";
 import { CartProvider } from "@/components/cart/cart-context";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import "./globals.css";
@@ -26,6 +31,14 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
+/* Brush script accent — the "Real People," lockup */
+const kaushan = Kaushan_Script({
+  variable: "--font-kaushan",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "beyou — Açaí Berry Glow | The beauty drink you will actually keep",
   description:
@@ -36,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${figtree.variable} ${greatVibes.variable} h-full antialiased`}
+      className={`${playfair.variable} ${figtree.variable} ${greatVibes.variable} ${kaushan.variable} h-full antialiased`}
     >
       <body className="flex min-h-dvh flex-col bg-shell font-sans text-ink">
         <CartProvider>
