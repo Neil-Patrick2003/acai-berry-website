@@ -39,7 +39,7 @@ export function AddToCartButton({
         if (timer.current) clearTimeout(timer.current);
         timer.current = setTimeout(() => setJustAdded(false), 1600);
       }}
-      className={`flex items-center justify-center rounded-full text-sm font-bold tracking-wide uppercase transition-colors ${STYLES[variant]}`}
+      className={`flex items-center justify-center rounded-full text-sm font-bold tracking-wide uppercase transition-[colors,transform] active:scale-[0.97] ${STYLES[variant]}`}
     >
       <CartIcon className="size-5" />
       {justAdded ? "Added" : label}

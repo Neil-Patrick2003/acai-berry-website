@@ -51,6 +51,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${playfair.variable} ${figtree.variable} ${greatVibes.variable} ${kaushan.variable} h-full antialiased`}
     >
+      <head>
+        {/* Without JS the reveal classes would hide content for good. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
+      </head>
       <body className="flex min-h-dvh flex-col bg-shell font-sans text-ink">
         <CartProvider>
           {children}

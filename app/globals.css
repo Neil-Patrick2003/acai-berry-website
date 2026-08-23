@@ -75,7 +75,20 @@
   --text-display-xl--letter-spacing: 0.005em;
 
   /* ---- Motion ------------------------------------------------------------ */
+  --ease-glide: cubic-bezier(0.22, 0.61, 0.36, 1);
   --animate-marquee: marquee 38s linear infinite;
+  --animate-rise: rise 0.7s var(--ease-glide) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 1.25rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 
   @keyframes marquee {
     from {
@@ -216,6 +229,37 @@
       rgb(216 198 156 / 0) 72%
     ),
     linear-gradient(to right, #f2eeec 0%, #f1eae3 55%, #ede5d4 100%);
+}
+
+/* Scroll reveals. The hidden state is server-rendered, so the <noscript> block
+   in the root layout unhides everything when JavaScript never runs. */
+@layer base {
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
+    transition:
+      opacity 0.7s var(--ease-glide),
+      transform 0.7s var(--ease-glide);
+  }
+
+  /* Only hint the compositor while there is still something to animate. */
+  [data-reveal]:not([data-revealed]) {
+    will-change: opacity, transform;
+  }
+
+  [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Never leave content stranded at the start of a reveal. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -40,7 +40,7 @@ export function Hero() {
         <div className="relative z-10 flex flex-col justify-center px-5 pt-10 pb-2 sm:px-8 lg:py-14 lg:pr-6 lg:pl-12 2xl:pl-20">
           <div className="mx-auto max-w-[36rem] text-center lg:mx-0 lg:max-w-[42rem] lg:text-left">
             {/* Social proof */}
-            <div className="flex items-center justify-center gap-2.5 lg:justify-start">
+            <div className="animate-rise flex items-center justify-center gap-2.5 lg:justify-start">
               <div className="flex gap-0.5 text-gold-400" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, i) => (
                   <StarIcon key={i} className="size-5" />
@@ -52,7 +52,7 @@ export function Hero() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-display-sm sm:text-display mt-4 font-display font-bold uppercase tracking-[-0.005em] text-brand-700 lg:mt-5 lg:text-[clamp(1.95rem,3.2vw,3rem)]/[1.08]">
+            <h1 className="animate-rise [animation-delay:120ms] text-display-sm sm:text-display mt-4 font-display font-bold uppercase tracking-[-0.005em] text-brand-700 lg:mt-5 lg:text-[clamp(1.95rem,3.2vw,3rem)]/[1.08]">
               <span className="block">The beauty drink</span>
               <span className="text-orchid-wash block">
                 You will actually keep.
@@ -60,7 +60,7 @@ export function Hero() {
             </h1>
 
             {/* Benefit pillars */}
-            <ul className="mt-8 grid gap-6 sm:grid-cols-3 sm:gap-x-5 sm:text-left lg:mt-9">
+            <ul className="animate-rise mt-8 grid gap-6 [animation-delay:240ms] sm:grid-cols-3 sm:gap-x-5 sm:text-left lg:mt-9">
               {PILLARS.map((pillar) => (
                 <li key={pillar.title}>
                   <div className="flex items-center justify-center gap-2 sm:justify-start">
@@ -79,7 +79,7 @@ export function Hero() {
             {/* Call to action */}
             <Link
               href="/products"
-              className="mt-9 inline-flex h-14 w-full max-w-[25rem] items-center justify-center rounded-full bg-brand-600 px-10 text-sm font-semibold uppercase tracking-[0.3em] text-white shadow-[0_18px_38px_-18px] shadow-brand-800/70 transition-colors hover:bg-brand-700 lg:mt-10 lg:h-[3.4rem]"
+              className="animate-rise mt-9 inline-flex h-14 w-full max-w-[25rem] [animation-delay:360ms] active:scale-[0.98] items-center justify-center rounded-full bg-brand-600 px-10 text-sm font-semibold uppercase tracking-[0.3em] text-white shadow-[0_18px_38px_-18px] shadow-brand-800/70 transition-colors hover:bg-brand-700 lg:mt-10 lg:h-[3.4rem]"
             >
               Shop now
             </Link>

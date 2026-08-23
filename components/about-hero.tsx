@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PeopleIcon, StarIcon } from "@/components/icons";
+import { Reveal } from "@/components/reveal";
 
 const STATS = [
   { Icon: PeopleIcon, value: "10,000+", label: "Happy Customers" },
@@ -22,7 +23,7 @@ export function AboutHero() {
           />
         </div>
 
-        <div>
+        <Reveal as="div">
           <h1 className="font-sans text-brand-700">
             <span className="block font-brush text-[clamp(1.6rem,3.4vw,2.6rem)] leading-tight">
               Real People,
@@ -62,7 +63,7 @@ export function AboutHero() {
               </div>
             ))}
           </dl>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

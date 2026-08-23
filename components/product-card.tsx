@@ -17,15 +17,15 @@ const peso = new Intl.NumberFormat("en-PH");
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="relative flex flex-col">
-      <div className="relative">
+    <article className="group relative flex h-full flex-col transition-transform duration-300 ease-out hover:-translate-y-1.5">
+      <div className="relative overflow-hidden rounded-3xl">
         <Image
           src={product.image}
           alt={product.alt}
           width={1330}
           height={1140}
           sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 90vw"
-          className="aspect-7/6 w-full rounded-3xl object-cover ring-4 ring-white"
+          className="aspect-7/6 w-full rounded-3xl object-cover ring-4 ring-white transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
         {product.bestSeller && (
           <BestSellerBadge className="absolute -top-6 -right-4 size-24 drop-shadow-md sm:-top-8 sm:-right-6 sm:size-28" />

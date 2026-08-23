@@ -16,7 +16,7 @@ export function BuyNowButton({ item }: { item: CartItem }) {
         closeCart();
         router.push("/checkout");
       }}
-      className="mt-4 flex h-11 w-full max-w-[15rem] items-center justify-center rounded-full bg-brand-600 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-700"
+      className="mt-4 flex h-11 w-full max-w-[15rem] items-center justify-center rounded-full bg-brand-600 text-sm font-bold tracking-wide text-white uppercase transition-[colors,transform] active:scale-[0.97] hover:bg-brand-700"
     >
       Order now
     </button>

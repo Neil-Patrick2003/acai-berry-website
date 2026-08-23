@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/reveal";
 import { ArrowCurveIcon } from "@/components/icons";
 
 type Benefit = {
@@ -90,7 +91,7 @@ export function WellnessRitual() {
   return (
     <section className="bg-sand px-5 py-16 sm:px-8 lg:px-12 lg:py-20 2xl:px-20">
       <div className="mx-auto max-w-6xl">
-        <header className="text-center">
+        <Reveal as="div" className="text-center">
           <h2 className="font-display text-[clamp(1.6rem,2.7vw,2.35rem)] font-bold text-brand-700">
             Elevate Your Everyday Wellness Ritual
           </h2>
@@ -98,7 +99,7 @@ export function WellnessRitual() {
             BEYOU is your daily ritual for overall wellness and a natural-looking
             glow.
           </p>
-        </header>
+        </Reveal>
 
         <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-10">
           <BenefitList items={LEFT} side="left" />

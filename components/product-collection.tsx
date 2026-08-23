@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/reveal";
 import { ProductCard, type Product } from "@/components/product-card";
 import { ProductFilters } from "@/components/product-filters";
 import { TornDivider } from "@/components/torn-divider";
@@ -108,11 +109,11 @@ export function ProductCollection() {
 
           <div>
             <ul className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-              {PRODUCTS.map((product) => (
+              {PRODUCTS.map((product, index) => (
                 <li key={product.slug} className="flex">
-                  <div className="flex-1">
+                  <Reveal as="div" delay={index * 110} className="flex-1">
                     <ProductCard product={product} />
-                  </div>
+                  </Reveal>
                 </li>
               ))}
             </ul>
@@ -122,7 +123,7 @@ export function ProductCollection() {
               {OFFERS.map(({ id, title, amount, priceLabel, detail, Icon, tone, flag }) => (
                 <li
                   key={title}
-                  className={`relative flex items-center gap-4 rounded-[2.5rem] px-5 py-5 ring-6 ring-white sm:gap-6 sm:px-8 ${
+                  className={`relative flex items-center gap-4 transition-transform duration-300 ease-out hover:-translate-y-1 rounded-[2.5rem] px-5 py-5 ring-6 ring-white sm:gap-6 sm:px-8 ${
                     tone === "lilac" ? "bg-lilac" : "bg-cream"
                   }`}
                 >

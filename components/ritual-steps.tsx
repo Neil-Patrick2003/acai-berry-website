@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/reveal";
 import { TornDivider } from "@/components/torn-divider";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { PlusIcon } from "@/components/icons";
@@ -133,18 +134,20 @@ export function RitualSteps() {
       <div className="mx-auto max-w-[1600px] px-5 pt-16 sm:px-8 lg:px-12 lg:pt-20 2xl:px-20">
         <div className="max-w-[38rem] lg:pl-8 2xl:pl-16">
           {/* ---- Steps ---------------------------------------------------- */}
-          <header className="text-center">
+          <Reveal as="div" className="text-center">
             <h2 className="font-display text-[clamp(1.75rem,3.4vw,2.75rem)] font-black uppercase tracking-[0.02em] text-brand-500">
               3 Steps Ritual
             </h2>
             <p className="mt-1 text-sm font-medium text-brand-600 sm:text-base">
               Easy steps for your glowing ritual
             </p>
-          </header>
+          </Reveal>
 
           <ol className="mt-8 flex flex-col gap-6 lg:mt-10 lg:gap-4">
-            {STEPS.map((step) => (
-              <StepCard key={step.number} step={step} />
+            {STEPS.map((step, index) => (
+              <Reveal key={step.number} as="div" delay={index * 110}>
+                <StepCard step={step} />
+              </Reveal>
             ))}
           </ol>
 

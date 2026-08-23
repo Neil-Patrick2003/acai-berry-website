@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CheckBadgeIcon } from "@/components/icons";
+import { Reveal } from "@/components/reveal";
 import { TornDivider } from "@/components/torn-divider";
 
 const PILLARS = ["GlutaCollagen", "Probiotics", "Antioxidants"];
@@ -40,7 +41,7 @@ export function ProductFeature() {
           />
         </div>
 
-        <div className="lg:pr-[16%]">
+        <Reveal as="div" className="lg:pr-[16%]">
           <ul className="flex flex-col gap-2.5 sm:gap-3.5">
             {PILLARS.map((pillar) => (
               <li key={pillar} className="flex items-center gap-3">
@@ -66,7 +67,7 @@ export function ProductFeature() {
           >
             Order now
           </Link>
-        </div>
+        </Reveal>
       </div>
 
       <TornDivider className="absolute inset-x-0 bottom-0 h-20 w-full sm:h-24 lg:h-32" />

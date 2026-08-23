@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/reveal";
 
 type Tile = {
   src: string;
@@ -60,13 +61,13 @@ const ALT = "A customer with her pouch of Açaí Berry Glow";
 
 function PhotoTile({ tile }: { tile: Tile }) {
   return (
-    <div className={`relative overflow-hidden ${tile.grow}`}>
+    <div className={`group relative overflow-hidden ${tile.grow}`}>
       <Image
         src={tile.src}
         alt={ALT}
         fill
         sizes={tile.sizes}
-        className="object-cover"
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
       />
     </div>
   );
@@ -76,9 +77,9 @@ export function CommunityGallery() {
   return (
     <section className="bg-sand px-4 pb-14 sm:px-6 lg:px-10 lg:pb-20 2xl:px-16">
       <div className="mx-auto max-w-[1400px] rounded-[1.75rem] bg-brand-300/70 p-4 sm:rounded-[2.5rem] sm:p-6 lg:p-8">
-        <h2 className="text-center font-display text-[clamp(1.25rem,2.6vw,2rem)] font-bold text-brand-700">
+        <Reveal as="div"><h2 className="text-center font-display text-[clamp(1.25rem,2.6vw,2rem)] font-bold text-brand-700">
           Loved by Our BEYOU Community
-        </h2>
+        </h2></Reveal>
 
         {/* Mosaic — each band carries its own aspect so the flex ratios have a
             height to divide, and the side column stacks below on small screens. */}
