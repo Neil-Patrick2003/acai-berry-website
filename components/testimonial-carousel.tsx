@@ -25,7 +25,7 @@ const TESTIMONIALS: Testimonial[] = [
     quote:
       "I tried so many collagen powder and capsules before but this one exceeds my expectations. My hair texture is better than before…. My skin looks healthier and younger! I will surely buy again!",
     image: "/about/customer-1.png",
-    alt: "Mikhaela holding a pouch of Açaí Berry Glow",
+    alt: "Mikhaela holding a pouch of Acai Berry Glow",
   },
   {
     name: "Sofie",
@@ -33,7 +33,7 @@ const TESTIMONIALS: Testimonial[] = [
     quote:
       "This is my new favorite collagen supplement. It tastes neutral and smells berries. It's also the cheapest one I've found so far!",
     image: "/about/customer-2.png",
-    alt: "Sofie pointing at a pouch of Açaí Berry Glow",
+    alt: "Sofie pointing at a pouch of Acai Berry Glow",
   },
   {
     name: "Diana Pomelo",
@@ -41,7 +41,7 @@ const TESTIMONIALS: Testimonial[] = [
     quote:
       "Hindi niya ako binigo sa results. 2nd day of using this collagen, nakakafresh po talaga siya and twice ko siya tinatake morning and evening. Soft sa balat at nag-shine balat ko pag-naaarawan.",
     image: "/about/customer-3.png",
-    alt: "Diana holding a pouch of Açaí Berry Glow",
+    alt: "Diana holding a pouch of Acai Berry Glow",
   },
   {
     // PLACEHOLDER — the name and quote stand in until the real review lands.
@@ -51,7 +51,7 @@ const TESTIMONIALS: Testimonial[] = [
     quote:
       "Two weeks in and my skin feels so much softer. Mabilis matunaw sa tubig and walang aftertaste, kaya hindi ko na nakakalimutan inumin araw-araw. Sulit na sulit!",
     image: "/about/customer-4.png",
-    alt: "Customer holding a pouch of Açaí Berry Glow",
+    alt: "Customer holding a pouch of Acai Berry Glow",
   },
 ];
 

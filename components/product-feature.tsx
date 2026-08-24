@@ -25,7 +25,7 @@ export function ProductFeature() {
         <div className="flex flex-col items-center">
           <Image
             src="/feature/wordmark.png"
-            alt="Açaí Berry Glow"
+            alt="Acai Berry Glow"
             width={630}
             height={300}
             sizes="(min-width: 1024px) 20vw, 52vw"
@@ -33,7 +33,7 @@ export function ProductFeature() {
           />
           <Image
             src="/feature/product.png"
-            alt="A pouch of Açaí Berry Glow beside a single sachet"
+            alt="A pouch of Acai Berry Glow beside a single sachet"
             width={714}
             height={734}
             sizes="(min-width: 1024px) 42vw, 88vw"
@@ -54,7 +54,7 @@ export function ProductFeature() {
           </ul>
 
           <p className="mt-6 max-w-[42rem] text-center font-display text-sm leading-relaxed text-brand-700 sm:text-base lg:mt-7">
-            BEYOU Açaí Berry Glow combines GlutaCollagen, Probiotics, and Açaí
+            BEYOU Acai Berry Glow combines GlutaCollagen, Probiotics, and Acai
             antioxidants to support skin hydration, nourishment, and a
             natural-looking glow.
             <br className="hidden sm:inline" /> A simple daily ritual to help you

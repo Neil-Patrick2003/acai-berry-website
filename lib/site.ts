@@ -17,10 +17,10 @@ function resolveSiteUrl() {
 
 export const SITE_URL = resolveSiteUrl();
 
-export const SITE_NAME = "beyou Açaí Berry Glow";
+export const SITE_NAME = "beyou Acai Berry Glow";
 
 export const SITE_DESCRIPTION =
-  "GlutaCollagen, probiotics and açaí antioxidants in one daily drink. Free shipping nationwide, 30-day money-back guarantee, FDA registered.";
+  "GlutaCollagen, probiotics and acai antioxidants in one daily drink. Free shipping nationwide, 30-day money-back guarantee, FDA registered.";
 
 /**
  * Next replaces a parent's `openGraph` wholesale when a child declares its own,

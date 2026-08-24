@@ -15,7 +15,7 @@ export function AboutHero() {
         <div className="rounded-2xl bg-brand-300 p-2 sm:rounded-3xl sm:p-2.5">
           <Image
             src="/about/glow-ritual.png"
-            alt="Açaí Berry Glow pouch and sachet — your daily glow ritual of açaí, GlutaCollagen and probiotics"
+            alt="Acai Berry Glow pouch and sachet — your daily glow ritual of acai, GlutaCollagen and probiotics"
             width={927}
             height={471}
             sizes="(min-width: 1024px) 46vw, 92vw"

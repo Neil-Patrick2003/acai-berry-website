@@ -57,7 +57,7 @@ const SIDE_COLUMN: Tile[] = [
   },
 ];
 
-const ALT = "A customer with her pouch of Açaí Berry Glow";
+const ALT = "A customer with her pouch of Acai Berry Glow";
 
 function PhotoTile({ tile }: { tile: Tile }) {
   return (

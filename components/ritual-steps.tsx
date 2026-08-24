@@ -22,7 +22,7 @@ const STEPS: Step[] = [
     title: "Pour your glow",
     body: "Open your BEYOU sachet and add it to your favorite glass…",
     image: "/steps/step-1.png",
-    alt: "Sachets of BEYOU Açaí Berry Glow being taken from the pouch",
+    alt: "Sachets of BEYOU Acai Berry Glow being taken from the pouch",
     indent: "lg:ml-0",
   },
   {
@@ -39,7 +39,7 @@ const STEPS: Step[] = [
     title: "Sip your ritual",
     body: "Make BEYOU part of your daily glow routine.",
     image: "/steps/step-3.png",
-    alt: "A finished glass of açaí berry drink on a woven coaster",
+    alt: "A finished glass of acai berry drink on a woven coaster",
     indent: "lg:ml-[11%]",
   },
 ];
@@ -51,14 +51,14 @@ const FAQS = [
       "Most people notice a difference in how their skin looks and feels after four to six weeks of daily use. Consistency matters more than dose — one sachet a day, every day.",
   },
   {
-    question: "When should I take Beyou Açaí Berry Glow?",
+    question: "When should I take Beyou Acai Berry Glow?",
     answer:
       "Any time that fits your routine. Many prefer the morning with breakfast; others make it an evening wind-down. Take it with water and enjoy it cold.",
   },
   {
     question: "Can I take this with other supplements?",
     answer:
-      "Yes. Açaí Berry Glow is a food supplement and pairs with most daily vitamins. If you are pregnant, nursing, or on prescription medication, check with your doctor first.",
+      "Yes. Acai Berry Glow is a food supplement and pairs with most daily vitamins. If you are pregnant, nursing, or on prescription medication, check with your doctor first.",
   },
   {
     question: "What if it doesn't work for me?",

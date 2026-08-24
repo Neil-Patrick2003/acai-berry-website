@@ -40,7 +40,7 @@ const RIGHT: Benefit[] = [
   {
     icon: "🫐",
     title: "Yummy Acai Flavor",
-    body: "Enjoy a delicious açaí-inspired flavor in every sip.",
+    body: "Enjoy a delicious acai-inspired flavor in every sip.",
   },
 ];
 
@@ -107,7 +107,7 @@ export function WellnessRitual() {
           <figure className="order-first mx-auto w-full max-w-[17rem] sm:col-span-2 lg:order-none lg:col-span-1 lg:max-w-[24rem]">
             <Image
               src="/ritual/portrait.png"
-              alt="Woman relaxing outdoors with a tall glass of BEYOU açaí berry drink"
+              alt="Woman relaxing outdoors with a tall glass of BEYOU acai berry drink"
               width={540}
               height={692}
               sizes="(min-width: 1024px) 336px, 272px"

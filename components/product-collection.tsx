@@ -27,7 +27,7 @@ const OFFERS = [
 export function ProductCollection({ products }: { products: Product[] }) {
   return (
     <section className="relative isolate overflow-hidden bg-shell pb-28 sm:pb-32 lg:pb-40">
-      {/* Tropical leaves behind the title, açaí berries in the lower corner */}
+      {/* Tropical leaves behind the title, acai berries in the lower corner */}
       <Image
         src="/decor/palm-leaves.png"
         alt=""

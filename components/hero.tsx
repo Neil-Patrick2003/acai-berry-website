@@ -20,7 +20,7 @@ const PILLARS = [
 export function Hero() {
   return (
     <section className="bg-hero-ground relative isolate flex flex-1 flex-col overflow-hidden">
-      {/* Açaí berries bleeding in from the lower-left corner */}
+      {/* Acai berries bleeding in from the lower-left corner */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-4 -left-6 -z-10 hidden w-52 opacity-30 lg:block xl:w-64 [mask-image:linear-gradient(to_bottom,transparent_0%,#000_24%)]"
@@ -94,7 +94,7 @@ export function Hero() {
           <div className="absolute inset-x-0 bottom-0 aspect-[872/877] [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,transparent_0%,#000_16%),linear-gradient(to_right,transparent_0%,#000_5%)]">
             <Image
               src="/hero/model.png"
-              alt="Woman holding a pouch of beyou Açaí Berry Glow drink powder"
+              alt="Woman holding a pouch of beyou Acai Berry Glow drink powder"
               fill
               preload
               sizes="(min-width: 1024px) 50vw, 100vw"

@@ -10,7 +10,7 @@ import { ProductListLd } from "@/components/structured-data";
 export const metadata: Metadata = {
   title: "Choose your perfect glow",
   description:
-    "Starter ritual, 2-pouch and 3-pouch bundles of beyou Açaí Berry Glow. Cash on delivery, free shipping nationwide.",
+    "Starter ritual, 2-pouch and 3-pouch bundles of beyou Acai Berry Glow. Cash on delivery, free shipping nationwide.",
   alternates: { canonical: "/products" },
   openGraph: pageOpenGraph({
     title: "Choose your perfect glow",

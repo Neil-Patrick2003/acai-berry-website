@@ -11,12 +11,12 @@ import { pageOpenGraph } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Real people, real glow",
   description:
-    "Thousands of women are glowing from the inside out with Açaí Berry Glow. Read verified customer reviews.",
+    "Thousands of women are glowing from the inside out with Acai Berry Glow. Read verified customer reviews.",
   alternates: { canonical: "/about" },
   openGraph: pageOpenGraph({
     title: "Real people, real glow",
     description:
-      "Thousands of women are glowing from the inside out with Açaí Berry Glow.",
+      "Thousands of women are glowing from the inside out with Acai Berry Glow.",
     path: "/about",
   }),
 };

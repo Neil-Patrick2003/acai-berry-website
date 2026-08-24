@@ -69,7 +69,7 @@ export function ProductListLd() {
           item: {
             "@type": "Product",
             name: product.name,
-            description: `${product.contents} of Açaí Berry Glow — GlutaCollagen, probiotics and açaí antioxidants.`,
+            description: `${product.contents} of Acai Berry Glow — GlutaCollagen, probiotics and acai antioxidants.`,
             image: `${SITE_URL}${product.image}`,
             brand: { "@type": "Brand", name: SITE_NAME },
             sku: product.slug,

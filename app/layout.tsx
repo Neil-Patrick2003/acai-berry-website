@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
-    "açaí berry glow",
+    "acai berry glow",
     "collagen drink Philippines",
     "GlutaCollagen",
     "probiotic collagen powder",

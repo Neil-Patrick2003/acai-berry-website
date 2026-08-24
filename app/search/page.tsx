@@ -9,7 +9,7 @@ import { PRODUCTS, searchProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search the beyou Açaí Berry Glow range.",
+  description: "Search the beyou Acai Berry Glow range.",
   // Endless query permutations are a classic source of thin duplicate pages.
   robots: { index: false, follow: true },
 };

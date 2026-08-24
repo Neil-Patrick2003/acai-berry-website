@@ -72,7 +72,7 @@ export function SiteFooter() {
             <Link href="/" className="inline-block">
               <Image
                 src="/brand/logo-glow.png"
-                alt="Açaí Berry Glow"
+                alt="Acai Berry Glow"
                 width={500}
                 height={300}
                 sizes="240px"

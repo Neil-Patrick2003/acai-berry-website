@@ -28,7 +28,7 @@ export const PRODUCTS: Product[] = [
     compareAt: 1099,
     contents: "10 Sachets",
     image: "/products/starter-ritual.png",
-    alt: "A pouch of Açaí Berry Glow with ten single-serve sachets",
+    alt: "A pouch of Acai Berry Glow with ten single-serve sachets",
     inStock: true,
   },
   {
@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     compareAt: 1599,
     contents: "2 Pouches (20 sachets)",
     image: "/products/two-pouch-bundle.png",
-    alt: "Two pouches of Açaí Berry Glow on a stone tray",
+    alt: "Two pouches of Acai Berry Glow on a stone tray",
     bestSeller: true,
     inStock: true,
   },
@@ -49,7 +49,7 @@ export const PRODUCTS: Product[] = [
     compareAt: 2190,
     contents: "3 Pouches (30 sachets)",
     image: "/products/three-pouch-bundle.png",
-    alt: "Three pouches of Açaí Berry Glow arranged on a woven mat",
+    alt: "Three pouches of Acai Berry Glow arranged on a woven mat",
     inStock: true,
   },
 ];
