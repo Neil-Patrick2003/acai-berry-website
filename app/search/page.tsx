@@ -8,7 +8,10 @@ import { SiteHeader } from "@/components/site-header";
 import { PRODUCTS, searchProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
-  title: "Search | beyou Açaí Berry Glow",
+  title: "Search",
+  description: "Search the beyou Açaí Berry Glow range.",
+  // Endless query permutations are a classic source of thin duplicate pages.
+  robots: { index: false, follow: true },
 };
 
 export default async function SearchPage({

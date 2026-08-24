@@ -6,11 +6,19 @@ import { PromoTicker } from "@/components/promo-ticker";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import { pageOpenGraph } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Real people, real glow | beyou Açaí Berry Glow",
+  title: "Real people, real glow",
   description:
     "Thousands of women are glowing from the inside out with Açaí Berry Glow. Read verified customer reviews.",
+  alternates: { canonical: "/about" },
+  openGraph: pageOpenGraph({
+    title: "Real people, real glow",
+    description:
+      "Thousands of women are glowing from the inside out with Açaí Berry Glow.",
+    path: "/about",
+  }),
 };
 
 export default function AboutPage() {

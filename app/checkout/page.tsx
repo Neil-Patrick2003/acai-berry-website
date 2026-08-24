@@ -6,8 +6,10 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "Checkout | beyou Açaí Berry Glow",
+  title: "Checkout",
   description: "Cash on delivery checkout for beyou Açaí Berry Glow.",
+  // A transient, per-visitor page — nothing here belongs in search results.
+  robots: { index: false, follow: false },
 };
 
 export default async function CheckoutPage({
