@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
-import { parseOrder, type OrderPayload } from "@/lib/order";
-import { buildFullAddress, toE164 } from "@/lib/order";
 import {
-  ORDER_NOTES,
-  buildLines,
-  pouchesFor,
-  toMinorUnits,
-} from "@/lib/pancake";
+  buildFullAddress,
+  parseOrder,
+  toE164,
+  type OrderPayload,
+} from "@/lib/order";
+import { toMinorUnits, variationIdFor } from "@/lib/pancake";
 
 /**
  * Order intake.
@@ -32,28 +31,20 @@ async function forwardToPancake(
   //   /shops/<SHOP_ID>/<endpoint>?api_key=<KEY>
   const url = `${PANCAKE_BASE}/shops/${config.shopId}/orders?api_key=${encodeURIComponent(config.apiKey)}`;
 
-  // Collapse the cart into pouches. Every line must be convertible, or the
-  // order would post a wrong quantity — fail loudly instead.
-  const pouches = order.items.reduce((total, item) => {
-    const perItem = pouchesFor(item.id);
-    if (perItem === null) {
+  // One line per variation. Pancake prices from the variation itself, so the
+  // total follows from quantity alone.
+  const items = order.items.map((item) => {
+    const variationId = variationIdFor(item.id);
+    if (!variationId) {
       throw new Error(
-        `No pouch quantity mapped for "${item.id}". Add it to POUCHES_PER_ITEM in lib/pancake.ts.`,
+        `No Pancake variation mapped for "${item.id}". Add it to VARIATION_IDS in lib/pancake.ts.`,
       );
     }
-    return total + perItem * item.quantity;
-  }, 0);
-
-  const items = buildLines(pouches, order.total);
+    return { variation_id: variationId, quantity: item.quantity };
+  });
 
   const phone = toE164(order.customer.phone);
 
-  const noteLines = [
-    `Landmark: ${order.customer.landmark}`,
-    ...order.items
-      .map((item) => ORDER_NOTES[item.id])
-      .filter((note): note is string => Boolean(note)),
-  ];
 
   // Field names taken from the live order response, not guessed — an earlier
   // attempt with `customer: { name, phone_number }` was accepted with HTTP 200
@@ -73,7 +64,7 @@ async function forwardToPancake(
       address: order.customer.street,
       full_address: buildFullAddress(order.customer),
     },
-    note: noteLines.join(" | "),
+    note: `Landmark: ${order.customer.landmark}`,
     cod: toMinorUnits(order.total),
     shipping_fee: toMinorUnits(order.shippingFee),
     total_price: toMinorUnits(order.total),

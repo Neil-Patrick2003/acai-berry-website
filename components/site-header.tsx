@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { SearchIcon } from "@/components/icons";
 import { MobileMenu } from "@/components/mobile-menu";
-import { CartButton } from "@/components/cart/cart-button";
 import { SiteNav } from "@/components/site-nav";
 
 export function SiteHeader() {
@@ -44,7 +43,6 @@ export function SiteHeader() {
         </form>
 
         <div className="ml-auto flex items-center gap-4 md:ml-0 lg:gap-7">
-          <CartButton />
 
           <MobileMenu />
         </div>

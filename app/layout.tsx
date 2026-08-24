@@ -5,8 +5,6 @@ import {
   Kaushan_Script,
   Playfair_Display,
 } from "next/font/google";
-import { CartProvider } from "@/components/cart/cart-context";
-import { CartDrawer } from "@/components/cart/cart-drawer";
 import "./globals.css";
 
 /* Display face — wordmark and hero headline */
@@ -58,10 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </noscript>
       </head>
       <body className="flex min-h-dvh flex-col bg-shell font-sans text-ink">
-        <CartProvider>
-          {children}
-          <CartDrawer />
-        </CartProvider>
+        {children}
       </body>
     </html>
   );

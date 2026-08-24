@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { CheckDiscIcon } from "@/components/icons";
-import { formatPeso, useCart, type CartLine } from "@/components/cart/cart-context";
+import type { Product } from "@/lib/products";
 import {
   EMPTY_CUSTOMER,
   PH_DIAL_CODE,
@@ -17,35 +17,29 @@ import {
 } from "@/lib/order";
 import { AddressFields } from "@/components/checkout/address-fields";
 
-function OrderLines({ lines }: { lines: CartLine[] }) {
+const peso = new Intl.NumberFormat("en-PH");
+const formatPeso = (amount: number) => `₱${peso.format(amount)}`;
+
+function OrderLines({ product }: { product: Product }) {
   return (
     <ul className="divide-y divide-brand-700/10">
-      {lines.map((line) => (
-        <li key={line.id} className="flex items-center gap-3 py-3">
-          {line.image && (
-            <Image
-              src={line.image}
-              alt=""
-              width={96}
-              height={96}
-              sizes="56px"
-              className="size-14 shrink-0 rounded-xl object-cover"
-            />
-          )}
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-bold text-brand-700">{line.name}</p>
-            {line.meta && (
-              <p className="text-xs text-ink-soft">{line.meta}</p>
-            )}
-            <p className="text-xs text-ink-soft">
-              {formatPeso(line.price)} × {line.quantity}
-            </p>
-          </div>
-          <p className="shrink-0 text-sm font-bold text-brand-600">
-            {formatPeso(line.price * line.quantity)}
-          </p>
-        </li>
-      ))}
+      <li className="flex items-center gap-3 py-3">
+        <Image
+          src={product.image}
+          alt=""
+          width={96}
+          height={96}
+          sizes="56px"
+          className="size-14 shrink-0 rounded-xl object-cover"
+        />
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-bold text-brand-700">{product.name}</p>
+          <p className="text-xs text-ink-soft">{product.contents}</p>
+        </div>
+        <p className="shrink-0 text-sm font-bold text-brand-600">
+          {formatPeso(product.price)}
+        </p>
+      </li>
     </ul>
   );
 }
@@ -71,8 +65,8 @@ function Totals({ subtotal }: { subtotal: number }) {
   );
 }
 
-export function CheckoutForm() {
-  const { lines, subtotal, hydrated, clear } = useCart();
+export function CheckoutForm({ product }: { product: Product | null }) {
+  const subtotal = product?.price ?? 0;
   const [values, setValues] = useState<Customer>(EMPTY_CUSTOMER);
   const [errors, setErrors] = useState<Partial<Record<keyof Customer, string>>>({});
   const [order, setOrder] = useState<OrderPayload | null>(null);
@@ -153,15 +147,15 @@ export function CheckoutForm() {
     );
   }
 
-  /* ---- Empty cart ------------------------------------------------------ */
-  if (hydrated && lines.length === 0) {
+  /* ---- Nothing chosen -------------------------------------------------- */
+  if (!product) {
     return (
       <div className="mx-auto max-w-md text-center">
         <h1 className="font-display text-3xl font-bold text-brand-700">
-          Your cart is empty
+          Choose a bundle first
         </h1>
         <p className="mt-3 text-ink-soft">
-          Add a bundle first and it will show up here.
+          Pick the one you want and we will bring you straight back here.
         </p>
         <Link
           href="/products"
@@ -206,13 +200,15 @@ export function CheckoutForm() {
                 landmark: values.landmark.trim(),
               },
               paymentMethod: "cash-on-delivery",
-              items: lines.map((line) => ({
-                id: line.id,
-                name: line.name,
-                quantity: line.quantity,
-                unitPrice: line.price,
-                lineTotal: line.price * line.quantity,
-              })),
+              items: [
+                {
+                  id: product.slug,
+                  name: product.name,
+                  quantity: 1,
+                  unitPrice: product.price,
+                  lineTotal: product.price,
+                },
+              ],
               subtotal,
               shippingFee: 0,
               total: subtotal,
@@ -239,7 +235,6 @@ export function CheckoutForm() {
               }
 
               setOrder(payload);
-              clear();
             } catch {
               setSubmitError(
                 "You appear to be offline. Check your connection and try again.",
@@ -390,7 +385,7 @@ export function CheckoutForm() {
           <h2 className="font-sans text-sm font-extrabold tracking-wide text-brand-700 uppercase">
             Order summary
           </h2>
-          <OrderLines lines={lines} />
+          <OrderLines product={product} />
           <Totals subtotal={subtotal} />
         </div>
       </aside>

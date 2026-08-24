@@ -1,48 +1,14 @@
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
-import { ProductCard, type Product } from "@/components/product-card";
+import { ProductCard } from "@/components/product-card";
+import type { Product } from "@/lib/products";
 import { ProductFilters } from "@/components/product-filters";
 import { TornDivider } from "@/components/torn-divider";
 import { GiftIcon, SparkleIcon, SubscribeIcon } from "@/components/icons";
-import { AddToCartButton } from "@/components/cart/add-to-cart-button";
-
-const PRODUCTS: Product[] = [
-  {
-    slug: "10-day-starter-ritual",
-    name: "10-Day Starter Ritual",
-    price: 999,
-    compareAt: 1099,
-    contents: "10 Sachets",
-    image: "/products/starter-ritual.png",
-    alt: "A pouch of Açaí Berry Glow with ten single-serve sachets",
-  },
-  {
-    slug: "2-pouch-bundle",
-    name: "2-Pouch Bundle",
-    price: 1490,
-    compareAt: 1599,
-    contents: "2 Pouches (20 sachets)",
-    image: "/products/two-pouch-bundle.png",
-    alt: "Two pouches of Açaí Berry Glow on a stone tray",
-    bestSeller: true,
-  },
-  {
-    slug: "3-pouch-bundle",
-    name: "3-Pouch Bundle",
-    price: 1990,
-    compareAt: 2190,
-    contents: "3 Pouches (30 sachets)",
-    image: "/products/three-pouch-bundle.png",
-    alt: "Three pouches of Açaí Berry Glow arranged on a woven mat",
-  },
-];
 
 const OFFERS = [
   {
-    id: "subscribe-and-save",
     title: "Subscribe & Save",
-    /** Entry price of the plan; the label carries the "+" for the tiers above it. */
-    amount: 1990,
     priceLabel: "₱1,990+",
     detail: "3 Pouches — auto monthly",
     Icon: SubscribeIcon,
@@ -50,9 +16,7 @@ const OFFERS = [
     flag: "Best deal",
   },
   {
-    id: "gift-ritual",
     title: "Gift Rituals",
-    amount: 990,
     priceLabel: "₱990+",
     detail: "1–3 Pouches",
     Icon: GiftIcon,
@@ -60,7 +24,7 @@ const OFFERS = [
   },
 ];
 
-export function ProductCollection() {
+export function ProductCollection({ products }: { products: Product[] }) {
   return (
     <section className="relative isolate overflow-hidden bg-shell pb-28 sm:pb-32 lg:pb-40">
       {/* Tropical leaves behind the title, açaí berries in the lower corner */}
@@ -94,7 +58,7 @@ export function ProductCollection() {
       </div>
 
       <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12 2xl:px-20">
-        <h1 className="relative z-10 -mt-14 text-center font-sans text-brand-700 sm:-mt-16 lg:-mt-20 lg:pl-[18rem]">
+        <h1 className="relative z-10 mt-8 text-center font-sans text-brand-700 sm:mt-10 lg:-mt-24 lg:pl-[25rem]">
           <span className="block text-[clamp(1.9rem,4.4vw,3.25rem)] leading-none font-black tracking-tight">
             Choose Your{" "}
           </span>
@@ -108,8 +72,18 @@ export function ProductCollection() {
           <ProductFilters />
 
           <div>
+            {products.length === 0 ? (
+              <div className="rounded-3xl bg-lilac/50 px-6 py-12 text-center">
+                <p className="font-bold text-brand-700">
+                  Nothing matches those filters.
+                </p>
+                <p className="mt-2 text-sm text-ink-soft">
+                  Try widening the price range or clearing availability.
+                </p>
+              </div>
+            ) : (
             <ul className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-              {PRODUCTS.map((product, index) => (
+              {products.map((product, index) => (
                 <li key={product.slug} className="flex">
                   <Reveal as="div" delay={index * 110} className="flex-1">
                     <ProductCard product={product} />
@@ -117,10 +91,11 @@ export function ProductCollection() {
                 </li>
               ))}
             </ul>
+            )}
 
             {/* Recurring and gifting offers */}
             <ul className="mt-12 grid gap-6 lg:grid-cols-2">
-              {OFFERS.map(({ id, title, amount, priceLabel, detail, Icon, tone, flag }) => (
+              {OFFERS.map(({ title, priceLabel, detail, Icon, tone, flag }) => (
                 <li
                   key={title}
                   className={`relative flex items-center gap-4 transition-transform duration-300 ease-out hover:-translate-y-1 rounded-[2.5rem] px-5 py-5 ring-6 ring-white sm:gap-6 sm:px-8 ${
@@ -144,12 +119,6 @@ export function ProductCollection() {
                       {detail}
                     </p>
                   </div>
-
-                  <AddToCartButton
-                    variant="solid"
-                    label="Add"
-                    item={{ id, name: title, price: amount, meta: detail }}
-                  />
 
                   {flag && (
                     <span className="absolute -top-3 right-8 rounded-md bg-brand-700 px-2.5 py-1 text-[0.6rem] leading-tight font-black tracking-wide text-white uppercase sm:text-[0.65rem]">
