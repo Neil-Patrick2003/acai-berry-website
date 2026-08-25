@@ -12,8 +12,8 @@ const LINK_COLUMNS = [
   {
     heading: "Discover",
     links: [
-      { label: "Shop on Shopee", href: "https://shopee.ph" },
-      { label: "Shop on TikTok", href: "https://tiktok.com" },
+      { label: "Shop on Shopee", href: "https://shopee.ph/shop/1808660457" },
+      { label: "Shop on TikTok", href: "https://vt.tiktok.com/ZSVNTnwW8/?page=TikTokShop" },
       { label: "Our Story", href: "/about" },
     ],
   },
@@ -37,7 +37,7 @@ const LINK_COLUMNS = [
 const SOCIALS = [
   { label: "Facebook", href: "https://facebook.com", Icon: FacebookIcon },
   { label: "Instagram", href: "https://instagram.com", Icon: InstagramIcon },
-  { label: "TikTok", href: "https://tiktok.com", Icon: TikTokIcon },
+  { label: "TikTok", href: "https://vt.tiktok.com/ZSVNTnwW8/?page=TikTokShop", Icon: TikTokIcon },
 ];
 
 const ASSURANCES = [
@@ -126,16 +126,24 @@ export function SiteFooter() {
                 {column.heading}
               </h2>
               <ul className="mt-1 flex flex-col sm:mt-4 sm:gap-2.5">
-                {column.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="inline-flex min-h-11 items-center text-nav text-brand-600 transition-colors hover:text-brand-700 sm:min-h-0"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {column.links.map((link) => {
+                  // Marketplace links leave the site; keep them in a new tab
+                  // like the social icons above.
+                  const isExternal = link.href.startsWith("http");
+                  return (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        {...(isExternal
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                        className="inline-flex min-h-11 items-center text-nav text-brand-600 transition-colors hover:text-brand-700 sm:min-h-0"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           ))}
