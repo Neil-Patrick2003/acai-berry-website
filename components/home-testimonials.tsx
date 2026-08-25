@@ -61,7 +61,7 @@ export function HomeTestimonials() {
           {REVIEWS.map((review) => (
             <li
               key={review.name}
-              className="w-[15rem] shrink-0 snap-start rounded-2xl bg-white/90 px-5 py-6 text-center shadow-[0_18px_40px_-30px_rgb(70_47_129/0.7)] sm:w-[17rem]"
+              className="relative w-[15rem] shrink-0 snap-start rounded-2xl bg-white/90 px-5 py-6 text-center shadow-[0_18px_40px_-30px_rgb(70_47_129/0.7)] sm:w-[17rem]"
             >
               <div
                 className="flex justify-center gap-0.5 text-gold-400"

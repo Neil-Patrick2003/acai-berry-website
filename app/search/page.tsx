@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SearchIcon } from "@/components/icons";
 import { ProductCard } from "@/components/product-card";
 import { PromoTicker } from "@/components/promo-ticker";
 import { Reveal } from "@/components/reveal";
@@ -13,6 +14,11 @@ export const metadata: Metadata = {
   // Endless query permutations are a classic source of thin duplicate pages.
   robots: { index: false, follow: true },
 };
+
+const PRIMARY_BUTTON =
+  "inline-flex h-11 items-center justify-center rounded-full bg-brand-600 px-7 text-btn font-bold tracking-wide text-white uppercase transition-[colors,transform] hover:bg-brand-700 active:scale-[0.97]";
+const SECONDARY_BUTTON =
+  "inline-flex h-11 items-center justify-center rounded-full border border-brand-300 px-7 text-btn font-bold tracking-wide text-brand-700 uppercase transition-[colors,transform] hover:bg-brand-100 active:scale-[0.97]";
 
 export default async function SearchPage({
   searchParams,
@@ -38,20 +44,73 @@ export default async function SearchPage({
               : "Everything in the range."}
           </p>
 
+          {/* Searching from the page itself, rather than only the header, so the
+              term stays visible and editable after the results load. */}
+          <form role="search" action="/search" className="mt-6 max-w-xl">
+            <label htmlFor="search-page-q" className="sr-only">
+              Search products
+            </label>
+            <div className="relative">
+              <input
+                id="search-page-q"
+                name="q"
+                type="search"
+                // Remounts on navigation so the box reflects the live query
+                // rather than keeping the previously rendered default.
+                key={query}
+                defaultValue={query}
+                placeholder="Try “pouch”, “bundle” or “sachet”…"
+                className="h-12 w-full rounded-full border border-brand-600/40 bg-white/70 pr-12 pl-5 text-body text-brand-700 placeholder:text-brand-700/50 focus:border-brand-600 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
+              />
+              <button
+                type="submit"
+                aria-label="Search"
+                className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-brand-700 transition-colors hover:bg-brand-700/10"
+              >
+                <SearchIcon className="size-[18px]" />
+              </button>
+            </div>
+          </form>
+
+          {query ? (
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-body-sm">
+              <Link
+                href="/search"
+                className="font-bold text-brand-600 underline underline-offset-4 transition-colors hover:text-brand-700"
+              >
+                Clear search
+              </Link>
+              <Link
+                href="/products"
+                className="text-brand-600 transition-colors hover:text-brand-700"
+              >
+                Back to products
+              </Link>
+              <Link
+                href="/"
+                className="text-brand-600 transition-colors hover:text-brand-700"
+              >
+                Back home
+              </Link>
+            </div>
+          ) : null}
+
           {query && results.length === 0 ? (
             <div className="mt-10 rounded-3xl bg-lilac/50 px-6 py-10 text-center">
               <p className="font-bold text-brand-700">
                 Nothing matched “{query}”.
               </p>
               <p className="mt-2 text-body text-ink-soft">
-                Try “pouch”, “bundle” or “sachet”.
+                Check the spelling, or browse the full range instead.
               </p>
-              <Link
-                href="/products"
-                className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-brand-600 px-7 text-btn font-bold tracking-wide text-white uppercase transition-[colors,transform] hover:bg-brand-700 active:scale-[0.97]"
-              >
-                Browse everything
-              </Link>
+              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link href="/products" className={PRIMARY_BUTTON}>
+                  Browse everything
+                </Link>
+                <Link href="/" className={SECONDARY_BUTTON}>
+                  Go home
+                </Link>
+              </div>
             </div>
           ) : (
             <ul className="mt-10 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
