@@ -46,14 +46,14 @@ export function ProductFeature() {
             {PILLARS.map((pillar) => (
               <li key={pillar} className="flex items-center gap-3">
                 <CheckBadgeIcon className="size-7 shrink-0 text-gold-450 sm:size-9" />
-                <h3 className="font-sans text-xl font-extrabold text-brand-700 sm:text-2xl lg:text-3xl">
+                <h3 className="font-sans text-h3 font-extrabold text-brand-700">
                   {pillar}
                 </h3>
               </li>
             ))}
           </ul>
 
-          <p className="mt-6 max-w-[42rem] text-center font-display text-sm leading-relaxed text-brand-700 sm:text-base lg:mt-7">
+          <p className="mt-6 max-w-[42rem] text-center font-display text-body text-brand-700 lg:mt-7">
             BEYOU Acai Berry Glow combines GlutaCollagen, Probiotics, and Acai
             antioxidants to support skin hydration, nourishment, and a
             natural-looking glow.
@@ -63,7 +63,7 @@ export function ProductFeature() {
 
           <Link
             href="/products"
-            className="mt-7 flex h-12 w-full max-w-[26rem] items-center justify-center rounded-full bg-brand-600 text-sm font-semibold tracking-[0.3em] text-white uppercase transition-colors hover:bg-brand-700 sm:mx-auto sm:h-14"
+            className="mt-7 flex h-12 w-full max-w-[26rem] items-center justify-center rounded-full bg-brand-600 text-btn font-semibold tracking-[0.3em] text-white uppercase transition-colors hover:bg-brand-700 sm:mx-auto sm:h-14"
           >
             Order now
           </Link>

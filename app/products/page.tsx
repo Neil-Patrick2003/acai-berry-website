@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { DailyRitual } from "@/components/daily-ritual";
+import { GlowBenefits } from "@/components/glow-benefits";
+import { InsideGoodness } from "@/components/inside-goodness";
 import { ProductCollection } from "@/components/product-collection";
 import { filterProducts, readFilters } from "@/lib/products";
 import { pageOpenGraph } from "@/lib/site";
@@ -23,6 +26,8 @@ export const metadata: Metadata = {
 export default async function ProductsPage({
   searchParams,
 }: PageProps<"/products">) {
+  // The sidebar is gone with the redesign, but ?min/?max/?availability links
+  // still narrow the grid, so older bookmarks and campaign URLs keep working.
   const products = filterProducts(readFilters(await searchParams));
 
   return (
@@ -31,6 +36,9 @@ export default async function ProductsPage({
       <PromoTicker />
       <main className="flex flex-1 flex-col">
         <ProductCollection products={products} />
+        <GlowBenefits />
+        <DailyRitual />
+        <InsideGoodness />
         <ProductListLd />
       </main>
       <SiteFooter />

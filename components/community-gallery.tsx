@@ -77,7 +77,7 @@ export function CommunityGallery() {
   return (
     <section className="bg-sand px-4 pb-14 sm:px-6 lg:px-10 lg:pb-20 2xl:px-16">
       <div className="mx-auto max-w-[1400px] rounded-[1.75rem] bg-brand-300/70 p-4 sm:rounded-[2.5rem] sm:p-6 lg:p-8">
-        <Reveal as="div"><h2 className="text-center font-display text-[clamp(1.25rem,2.6vw,2rem)] font-bold text-brand-700">
+        <Reveal as="div"><h2 className="text-center font-display text-h2 font-bold text-brand-700">
           Loved by Our BEYOU Community
         </h2></Reveal>
 

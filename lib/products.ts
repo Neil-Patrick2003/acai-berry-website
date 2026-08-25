@@ -12,6 +12,8 @@ export type Product = {
   image: string;
   alt: string;
   bestSeller?: boolean;
+  /** Ribbon worn across the top of the card. At most one bundle per tone. */
+  badge?: { label: string; tone: "brand" | "gold" };
   inStock: boolean;
 };
 
@@ -40,6 +42,7 @@ export const PRODUCTS: Product[] = [
     image: "/products/two-pouch-bundle.png",
     alt: "Two pouches of Acai Berry Glow on a stone tray",
     bestSeller: true,
+    badge: { label: "Most popular", tone: "brand" },
     inStock: true,
   },
   {
@@ -50,6 +53,7 @@ export const PRODUCTS: Product[] = [
     contents: "3 Pouches (30 sachets)",
     image: "/products/three-pouch-bundle.png",
     alt: "Three pouches of Acai Berry Glow arranged on a woven mat",
+    badge: { label: "Best value", tone: "gold" },
     inStock: true,
   },
 ];

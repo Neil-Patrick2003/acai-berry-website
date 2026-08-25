@@ -17,7 +17,7 @@ export function SiteNav() {
               <Link
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`text-[0.95rem] font-medium tracking-wide text-brand-700 uppercase underline-offset-[6px] transition-colors hover:text-brand-600 hover:underline ${
+                className={`text-nav font-medium tracking-wide text-brand-700 uppercase underline-offset-[6px] transition-colors hover:text-brand-600 hover:underline ${
                   active ? "underline" : ""
                 }`}
               >

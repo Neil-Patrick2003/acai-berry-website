@@ -5,7 +5,8 @@ export const NAV_LINKS = [
 ];
 
 export function isActive(pathname: string, href: string) {
-  // "/" would prefix-match everything, so it has to be exact.
+  // In-page anchors never own the page, and "/" would prefix-match everything.
+  if (href.includes("#")) return false;
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }

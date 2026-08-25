@@ -1,24 +1,30 @@
+import {
+  GiftIcon,
+  RefreshIcon,
+  ShieldCheckIcon,
+  TagIcon,
+  TruckIcon,
+} from "@/components/icons";
+
 const PROMOS = [
-  "Free shipping nationwide",
-  "30-day money-back guarantee",
-  "Buy 3, get 2 free",
-  "FDA registered",
-  "Limited time: save up to 40%",
+  { Icon: TruckIcon, label: "Free shipping nationwide" },
+  { Icon: RefreshIcon, label: "30-day money-back guarantee" },
+  { Icon: GiftIcon, label: "Buy 3, get 2 free" },
+  { Icon: ShieldCheckIcon, label: "FDA registered" },
+  { Icon: TagIcon, label: "Limited time: save up to 40%" },
 ];
 
 function TickerRun({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
-    <ul
-      aria-hidden={ariaHidden}
-      className="flex shrink-0 items-center gap-8 pr-8 sm:gap-12 sm:pr-12"
-    >
-      {PROMOS.map((promo) => (
-        <li key={promo} className="flex items-center gap-8 sm:gap-12">
-          <span className="text-label whitespace-nowrap text-brand-700 uppercase sm:text-sm">
-            {promo}
-          </span>
-          <span aria-hidden="true" className="text-brand-700/70">
-            +
+    <ul aria-hidden={ariaHidden} className="flex shrink-0 items-center">
+      {PROMOS.map(({ Icon, label }) => (
+        <li
+          key={label}
+          className="flex items-center gap-2.5 border-r border-brand-700/25 px-8 sm:px-12"
+        >
+          <Icon className="size-[1.15rem] shrink-0 text-brand-700/80" />
+          <span className="text-announce tracking-[0.08em] whitespace-nowrap text-brand-700 uppercase">
+            {label}
           </span>
         </li>
       ))}

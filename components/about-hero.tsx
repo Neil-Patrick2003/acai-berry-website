@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { PeopleIcon, StarIcon } from "@/components/icons";
 import { Reveal } from "@/components/reveal";
 
@@ -6,6 +7,23 @@ const STATS = [
   { Icon: PeopleIcon, value: "10,000+", label: "Happy Customers" },
   { Icon: StarIcon, value: "4.9/5", label: "Customer Rating" },
 ];
+
+/**
+ * Type scale, as specified: every size below is a clamp() tuned to hit the
+ * mobile figure at a 390px viewport and the desktop figure at 1440px.
+ *
+ *   label 11.5→15px · headline 35→56px · script 39→61px · body 15→17.5px
+ *   stat value 19→24px · stat label 10.5→13px · button 14.5→15.5px
+ */
+const TYPE = {
+  label: "text-[clamp(0.7rem,0.64rem+0.33vw,0.95rem)]",
+  headline: "text-[clamp(2rem,1.7rem+2vw,3.5rem)]",
+  script: "text-[clamp(2.25rem,1.93rem+2.1vw,3.8rem)]",
+  body: "text-[clamp(0.9rem,0.88rem+0.24vw,1.125rem)]",
+  statValue: "text-[clamp(1.15rem,1.07rem+0.48vw,1.6rem)]",
+  statLabel: "text-[clamp(0.65rem,0.6rem+0.24vw,0.8125rem)]",
+  button: "text-[clamp(0.88rem,0.88rem+0.1vw,1rem)]",
+};
 
 export function AboutHero() {
   return (
@@ -24,19 +42,26 @@ export function AboutHero() {
         </div>
 
         <Reveal as="div">
-          <h1 className="font-sans text-brand-700">
-            <span className="block font-brush text-[clamp(1.6rem,3.4vw,2.6rem)] leading-tight">
+          <p
+            className={`${TYPE.label} font-semibold uppercase tracking-[0.28em] text-brand-500`}
+          >
+            About beyou
+          </p>
+
+          <h1 className="mt-3 font-sans text-brand-700">
+            <span className={`${TYPE.headline} block font-black tracking-tight leading-[1.06]`}>
               Real People,
             </span>
-            <span className="mt-1 block text-[clamp(1.9rem,4.4vw,3.4rem)]/[1.1] font-black tracking-tight">
+            <span className={`${TYPE.script} -mt-1 block font-brush leading-[1.25] text-brand-600`}>
               Real Glow,
-              <br />
+            </span>
+            <span className={`${TYPE.headline} block font-black tracking-tight leading-[1.06]`}>
               Real Result.
             </span>
           </h1>
 
-          <p className="mt-4 max-w-lg text-sm font-bold text-brand-600 sm:text-base lg:text-lg">
-            thousands of amazing women are glowing from the inside out with
+          <p className={`${TYPE.body} mt-4 max-w-lg font-bold text-brand-600`}>
+            Thousands of amazing women are glowing from the inside out with
             AcaiBerry Glow.
           </p>
 
@@ -52,10 +77,12 @@ export function AboutHero() {
                 <div>
                   <dt className="sr-only">{label}</dt>
                   <dd>
-                    <span className="block text-lg leading-tight font-extrabold sm:text-xl">
+                    <span
+                      className={`${TYPE.statValue} block leading-tight font-extrabold`}
+                    >
                       {value}
                     </span>
-                    <span className="block text-xs text-white/85 sm:text-sm">
+                    <span className={`${TYPE.statLabel} block text-white/85`}>
                       {label}
                     </span>
                   </dd>
@@ -63,6 +90,15 @@ export function AboutHero() {
               </div>
             ))}
           </dl>
+
+          <div>
+            <Link
+              href="/products"
+              className={`${TYPE.button} mt-6 inline-flex h-12 items-center justify-center rounded-full bg-brand-600 px-10 font-semibold uppercase tracking-[0.28em] text-white shadow-[0_18px_38px_-18px] shadow-brand-800/70 transition-colors hover:bg-brand-700 active:scale-[0.98] sm:h-[3.25rem]`}
+            >
+              Shop now
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>

@@ -104,7 +104,7 @@ export function ProductFilters() {
       />
       <label
         htmlFor="filters-toggle"
-        className="flex min-h-12 cursor-pointer items-center justify-between rounded-full border border-brand-700/40 bg-white/60 px-5 text-sm font-bold tracking-wide text-brand-700 uppercase lg:hidden"
+        className="flex min-h-12 cursor-pointer items-center justify-between rounded-full border border-brand-700/40 bg-white/60 px-5 text-btn font-bold tracking-wide text-brand-700 uppercase lg:hidden"
       >
         Filters
         <PlusIcon className="size-4 transition-transform duration-200 peer-checked:rotate-45" />
@@ -112,13 +112,13 @@ export function ProductFilters() {
 
       <div className="mt-4 hidden peer-checked:block lg:mt-0 lg:block">
         <fieldset>
-          <legend className="py-2 text-sm font-bold tracking-wide text-brand-700 uppercase">
+          <legend className="py-2 text-body-sm font-bold tracking-wide text-brand-700 uppercase">
             Availability
           </legend>
           <ul className="mt-1 flex flex-col gap-1.5">
             {AVAILABILITY.map((option) => (
               <li key={option.value}>
-                <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm text-brand-700 sm:min-h-0 sm:py-1">
+                <label className="flex min-h-11 cursor-pointer items-center gap-3 text-body-sm text-brand-700 sm:min-h-0 sm:py-1">
                   <input
                     type="checkbox"
                     name="availability"
@@ -135,7 +135,7 @@ export function ProductFilters() {
         </fieldset>
 
         <div className="mt-7">
-          <p className="flex items-center justify-between py-2 text-sm font-bold tracking-wide text-brand-700 uppercase">
+          <p className="flex items-center justify-between py-2 text-body-sm font-bold tracking-wide text-brand-700 uppercase">
             Price
             <MinusIcon className="size-4 text-brand-700/50" />
           </p>
@@ -181,7 +181,7 @@ export function ProductFilters() {
                 <label htmlFor={field.id} className="sr-only">
                   {field.label}
                 </label>
-                <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-sm text-brand-700/70">
+                <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-body-sm text-brand-700/70">
                   ₱
                 </span>
                 <input
@@ -196,7 +196,7 @@ export function ProductFilters() {
                       ),
                     })
                   }
-                  className="h-11 w-full rounded-full border border-brand-700/40 bg-white/60 pr-4 pl-9 text-right text-sm text-brand-700 focus:border-brand-600 focus:bg-white focus:outline-none"
+                  className="h-11 w-full rounded-full border border-brand-700/40 bg-white/60 pr-4 pl-9 text-right text-body-sm text-brand-700 focus:border-brand-600 focus:bg-white focus:outline-none"
                 />
               </div>
             ))}
@@ -209,7 +209,7 @@ export function ProductFilters() {
                 setRange({ min: PRICE_BOUNDS.min, max: PRICE_BOUNDS.max });
                 router.replace(pathname, { scroll: false });
               }}
-              className="mt-5 text-sm font-semibold text-brand-600 underline underline-offset-4 transition-colors hover:text-brand-700"
+              className="mt-5 text-body-sm font-semibold text-brand-600 underline underline-offset-4 transition-colors hover:text-brand-700"
             >
               Clear filters
             </button>

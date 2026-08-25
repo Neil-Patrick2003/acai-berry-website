@@ -81,22 +81,22 @@ function TestimonialCard({ item }: { item: Testimonial }) {
       <div className="relative flex flex-1 flex-col items-center px-6 pt-4 pb-10 text-center">
         <div className="flex w-full items-start justify-between gap-3">
           <QuoteMarkIcon className="size-8 shrink-0 rotate-180 fill-brand-300 sm:size-9" />
-          <p className="mt-1 font-display text-sm tracking-wide text-brand-400 italic sm:text-base">
+          <p className="mt-1 font-display text-body-sm tracking-wide text-brand-400 italic">
             {item.name.toUpperCase()}
           </p>
         </div>
 
-        <h3 className="mt-2 font-sans text-base font-extrabold text-gold-400 sm:text-lg">
+        <h3 className="mt-2 font-sans text-h4 font-extrabold text-gold-400">
           {item.headline}
         </h3>
 
-        <p className="mt-3 text-[0.8rem] leading-relaxed font-bold text-brand-700 sm:text-[0.82rem]">
+        <p className="mt-3 text-body-sm font-bold text-brand-700">
           {item.quote}
         </p>
 
         <QuoteMarkIcon className="mt-auto size-8 self-end fill-brand-300 sm:size-9" />
 
-        <p className="mt-1 flex items-center gap-1.5 text-[0.65rem] tracking-wide text-brand-400 uppercase sm:text-xs">
+        <p className="mt-1 flex items-center gap-1.5 text-meta tracking-wide text-brand-400 uppercase">
           <VerifiedIcon className="size-4" />
           Verified customer
         </p>

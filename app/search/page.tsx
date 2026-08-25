@@ -28,11 +28,11 @@ export default async function SearchPage({
       <PromoTicker />
       <main className="flex flex-1 flex-col bg-shell px-5 py-10 sm:px-8 lg:px-12 lg:py-14 2xl:px-20">
         <div className="mx-auto w-full max-w-[1400px]">
-          <h1 className="font-display text-3xl font-bold text-brand-700 sm:text-4xl">
+          <h1 className="font-display text-h1 font-bold text-brand-700">
             {query ? `Results for “${query}”` : "All products"}
           </h1>
 
-          <p className="mt-2 text-sm text-ink-soft">
+          <p className="mt-2 text-body text-ink-soft">
             {query
               ? `${results.length} ${results.length === 1 ? "product" : "products"} found`
               : "Everything in the range."}
@@ -43,12 +43,12 @@ export default async function SearchPage({
               <p className="font-bold text-brand-700">
                 Nothing matched “{query}”.
               </p>
-              <p className="mt-2 text-sm text-ink-soft">
+              <p className="mt-2 text-body text-ink-soft">
                 Try “pouch”, “bundle” or “sachet”.
               </p>
               <Link
                 href="/products"
-                className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-brand-600 px-7 text-sm font-bold tracking-wide text-white uppercase transition-[colors,transform] hover:bg-brand-700 active:scale-[0.97]"
+                className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-brand-600 px-7 text-btn font-bold tracking-wide text-white uppercase transition-[colors,transform] hover:bg-brand-700 active:scale-[0.97]"
               >
                 Browse everything
               </Link>
