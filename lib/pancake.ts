@@ -13,16 +13,16 @@
  * recreated, because the id changes.
  */
 export const VARIATION_IDS: Record<string, string> = {
-  "10-day-starter-ritual": "88af91eb-2f97-4825-8a8d-b6dbb20f59e1", // ABG-STARTER-10
-  "2-pouch-bundle": "2d96f8d8-5d11-4c93-b303-9740e6eaa4e9", // ABG-BUNDLE-2
-  "3-pouch-bundle": "cd7315a1-7ed9-4b59-b0ca-ed15f996f2da", // ABG-BUNDLE-3
+  "10-day-starter-ritual": "db9fb2b7-e17f-4dd4-9cff-faa17977f8a8", // ABG-STARTER-10
+  "2-pouch-bundle": "bfcb2d2a-1187-4667-ab87-1983ee670405", // ABG-BUNDLE-2
+  "3-pouch-bundle": "3eb2574e-d9f8-4de1-b494-c56b9ff854a2", // ABG-BUNDLE-3
 };
 
 /**
- * The shop reports its currency as "PHP100", and a ₱999 variation comes back as
- * retail_price 99900 — prices cross the API in centavos.
+ * The shop reports its currency as plain "PHP", and a ₱999 variation comes back
+ * as retail_price 999 — prices cross the API in whole pesos, not centavos.
  */
-export const CURRENCY_MULTIPLIER = 100;
+export const CURRENCY_MULTIPLIER = 1;
 
 export function toMinorUnits(amountInPesos: number) {
   return Math.round(amountInPesos * CURRENCY_MULTIPLIER);

@@ -1,8 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   FacebookIcon,
   InstagramIcon,
+  LeafIcon,
+  RefreshIcon,
+  ShieldCheckIcon,
   TikTokIcon,
 } from "@/components/icons";
 
@@ -10,8 +12,8 @@ const LINK_COLUMNS = [
   {
     heading: "Discover",
     links: [
-      { label: "Shop on Shopee", href: "https://shopee.ph" },
-      { label: "Shop on TikTok", href: "https://tiktok.com" },
+      { label: "Shop on Shopee", href: "https://shopee.ph/shop/1808660457" },
+      { label: "Shop on TikTok", href: "https://vt.tiktok.com/ZSVNTnwW8/?page=TikTokShop" },
       { label: "Our Story", href: "/about" },
     ],
   },
@@ -25,7 +27,7 @@ const LINK_COLUMNS = [
   {
     heading: "Support",
     links: [
-      { label: "FAQs", href: "/faq" },
+      { label: "FAQs", href: "/#faqs" },
       { label: "Contact Us", href: "/contact" },
       { label: "Privacy Policy", href: "/privacy" },
     ],
@@ -35,6 +37,12 @@ const LINK_COLUMNS = [
 const SOCIALS = [
   { label: "Facebook", href: "https://facebook.com", Icon: FacebookIcon },
   { label: "Instagram", href: "https://instagram.com", Icon: InstagramIcon },
+  { label: "TikTok", href: "https://vt.tiktok.com/ZSVNTnwW8/?page=TikTokShop", Icon: TikTokIcon },
+];
+
+const ASSURANCES = [
+  { Icon: ShieldCheckIcon, label: "FDA registered" },
+  { Icon: RefreshIcon, label: "30-day money-back guarantee" },
 ];
 
 const LEGAL_LINKS = [
@@ -50,37 +58,41 @@ const PAYMENTS = [
   { label: "Google Pay", short: "G Pay", color: "#5f6368" },
   { label: "Mastercard", short: "MC", color: "#eb001b" },
   { label: "PayPal", short: "PayPal", color: "#003087" },
-  { label: "JCB", short: "JCB", color: "#0e4c96" },
   { label: "Visa", short: "VISA", color: "#1a1f71" },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden bg-sand">
+    <footer className="relative overflow-hidden bg-white px-5 pt-12 pb-8 sm:px-8 lg:pr-28 lg:pl-12 xl:pr-32 2xl:pl-20">
       {/* Payday ribbon, flush to the right edge */}
       <div className="absolute inset-y-0 right-0 hidden w-16 items-center justify-center bg-brand-700 lg:flex xl:w-20">
-        <p className="flex gap-2 rotate-180 font-display text-lg italic text-white [writing-mode:vertical-rl] xl:text-xl">
+        <p className="flex rotate-180 gap-2 font-display text-h4 text-white italic [writing-mode:vertical-rl]">
           <span>Up to 5% off</span>
           <span className="font-bold tracking-wide uppercase">Payday sale</span>
         </p>
       </div>
 
-      <div className="mx-auto max-w-[1600px] px-5 pt-12 sm:px-8 lg:pr-28 lg:pl-12 xl:pr-32 2xl:pl-20">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] lg:gap-x-12">
-          {/* Brand + socials */}
+      <div className="mx-auto max-w-[1500px]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_repeat(3,minmax(0,0.8fr))_minmax(0,1fr)] lg:gap-x-10">
+          {/* Brand */}
           <div>
-            <Link href="/" className="inline-block">
-              <Image
-                src="/brand/logo-glow.png"
-                alt="Acai Berry Glow"
-                width={500}
-                height={300}
-                sizes="240px"
-                className="h-auto w-52 lg:w-60"
+            <Link href="/" className="relative inline-block">
+              <span className="font-display text-4xl leading-none font-bold tracking-tight text-brand-700">
+                beyou
+              </span>
+              <LeafIcon
+                aria-hidden="true"
+                className="absolute -top-1 -right-3 size-5 -rotate-[20deg] text-[#5aa469]"
               />
             </Link>
 
-            <ul className="mt-5 flex items-center gap-4">
+            <p className="mt-3 text-body-sm text-ink-soft">
+              Your daily ritual.
+              <br />
+              Your best you.
+            </p>
+
+            <ul className="mt-5 flex items-center gap-3">
               {SOCIALS.map(({ label, href, Icon }) => (
                 <li key={label}>
                   <a
@@ -88,61 +100,71 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="-m-1.5 block p-1.5 text-brand-700 transition-opacity hover:opacity-70"
+                    className="grid size-9 place-items-center rounded-full bg-brand-700 text-white transition-colors hover:bg-brand-600"
                   >
-                    <Icon className="size-8" />
+                    <Icon className="size-4" />
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href="https://tiktok.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="-m-1.5 flex items-center gap-1 p-1.5 text-brand-700 transition-opacity hover:opacity-70"
-                >
-                  <TikTokIcon className="size-7" />
-                  <span className="text-xl font-black tracking-tight">
-                    TikTok
-                  </span>
-                </a>
-              </li>
             </ul>
 
-            <p className="mt-4 text-sm font-bold tracking-wide text-brand-700 uppercase">
+            <p className="mt-4 text-body-sm font-bold tracking-wide text-brand-700 uppercase">
               Follow us!
             </p>
           </div>
 
           {/* Link columns */}
           {LINK_COLUMNS.map((column) => (
-            <nav key={column.heading} aria-labelledby={`footer-${column.heading}`}>
+            <nav
+              key={column.heading}
+              aria-labelledby={`footer-${column.heading}`}
+            >
               <h2
                 id={`footer-${column.heading}`}
-                className="font-sans text-xl font-extrabold text-brand-700"
+                className="font-sans text-body font-bold tracking-[0.12em] text-brand-700 uppercase"
               >
                 {column.heading}
               </h2>
               <ul className="mt-1 flex flex-col sm:mt-4 sm:gap-2.5">
-                {column.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="inline-flex min-h-11 items-center text-sm text-brand-700 underline underline-offset-4 transition-colors hover:text-brand-500 sm:min-h-0"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {column.links.map((link) => {
+                  // Marketplace links leave the site; keep them in a new tab
+                  // like the social icons above.
+                  const isExternal = link.href.startsWith("http");
+                  return (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        {...(isExternal
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                        className="inline-flex min-h-11 items-center text-nav text-brand-600 transition-colors hover:text-brand-700 sm:min-h-0"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           ))}
+
+          {/* Assurances */}
+          <ul className="flex flex-col gap-5 sm:col-span-2 lg:col-span-1 lg:border-l lg:border-brand-700/15 lg:pl-10">
+            {ASSURANCES.map(({ Icon, label }) => (
+              <li key={label} className="flex items-center gap-3">
+                <Icon className="size-8 shrink-0 text-brand-700" />
+                <span className="max-w-[9rem] text-body-sm font-bold tracking-[0.08em] text-brand-700 uppercase">
+                  {label}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Legal bar */}
-        <div className="mt-12 flex flex-col gap-5 border-t border-brand-700/15 py-6 lg:flex-row lg:items-center lg:gap-10">
-          <p className="text-xs text-ink-soft">
-            © 2025 Beyou Acai Berry Glow.{" "}
+        <div className="mt-10 flex flex-col gap-5 border-t border-brand-700/15 pt-6 lg:flex-row lg:items-center lg:gap-10">
+          <p className="text-meta text-ink-soft">
+            © 2025 BEYOU Acai Berry Glow. All rights reserved.{" "}
             <a
               href="https://shopify.com"
               target="_blank"
@@ -158,7 +180,7 @@ export function SiteFooter() {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="inline-flex min-h-11 items-center text-sm text-brand-700 transition-colors hover:text-brand-500 sm:min-h-0"
+                  className="inline-flex min-h-11 items-center text-meta text-ink-soft transition-colors hover:text-brand-600 sm:min-h-0"
                 >
                   {link.label}
                 </Link>

@@ -30,11 +30,11 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-bold text-brand-700">
+      <label htmlFor={id} className="block text-body-sm font-bold text-brand-700">
         {label}
       </label>
       {hint && (
-        <p id={`${id}-hint`} className="mt-0.5 text-xs text-ink-soft">
+        <p id={`${id}-hint`} className="mt-0.5 text-meta text-ink-soft">
           {hint}
         </p>
       )}
@@ -43,7 +43,7 @@ function Field({
         <p
           id={`${id}-error`}
           role="alert"
-          className="mt-1.5 text-xs font-semibold text-red-600"
+          className="mt-1.5 text-meta font-semibold text-red-600"
         >
           {error}
         </p>
@@ -53,7 +53,7 @@ function Field({
 }
 
 function selectClass(error?: string) {
-  return `w-full appearance-none rounded-2xl border-2 bg-white/70 px-4 py-3 text-sm text-brand-700 focus:bg-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
+  return `w-full appearance-none rounded-2xl border-2 bg-white/70 px-4 py-3 text-body-sm text-brand-700 focus:bg-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
     error ? "border-red-500" : "border-brand-700/40 focus:border-brand-600"
   }`;
 }

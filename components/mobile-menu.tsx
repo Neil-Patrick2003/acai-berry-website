@@ -105,7 +105,7 @@ export function MobileMenu() {
                 name="q"
                 type="search"
                 placeholder="SEARCH"
-                className="h-12 w-full rounded-full border border-brand-600/60 bg-white/60 pr-12 pl-5 text-sm tracking-wide text-brand-700 uppercase placeholder:text-brand-700/70 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
+                className="h-12 w-full rounded-full border border-brand-600/60 bg-white/60 pr-12 pl-5 text-body-sm tracking-wide text-brand-700 uppercase placeholder:text-brand-700/70 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
               />
               <button
                 type="submit"
@@ -127,7 +127,7 @@ export function MobileMenu() {
                       href={link.href}
                       onClick={() => setOpen(false)}
                       aria-current={active ? "page" : undefined}
-                      className={`flex min-h-14 items-center rounded-2xl px-3 text-lg font-medium tracking-wide uppercase transition-colors ${
+                      className={`flex min-h-14 items-center rounded-2xl px-3 text-nav font-medium tracking-wide uppercase transition-colors ${
                         active
                           ? "bg-brand-700/10 text-brand-700 underline underline-offset-[6px]"
                           : "text-brand-700 hover:bg-brand-700/5"
@@ -144,7 +144,7 @@ export function MobileMenu() {
           <Link
             href="/account"
             onClick={() => setOpen(false)}
-            className="mt-auto mx-5 mb-6 flex h-12 items-center justify-center rounded-full border-2 border-brand-700 text-sm font-bold tracking-wide text-brand-700 uppercase"
+            className="mt-auto mx-5 mb-6 flex h-12 items-center justify-center rounded-full border-2 border-brand-700 text-btn font-bold tracking-wide text-brand-700 uppercase"
           >
             Sign in
           </Link>

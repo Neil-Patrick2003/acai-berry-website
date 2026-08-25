@@ -29,7 +29,8 @@ export function OrganizationLd() {
         sameAs: [
           "https://facebook.com",
           "https://instagram.com",
-          "https://tiktok.com",
+          "https://vt.tiktok.com/ZSVNTnwW8/?page=TikTokShop",
+          "https://shopee.ph/shop/1808660457",
         ],
       }}
     />

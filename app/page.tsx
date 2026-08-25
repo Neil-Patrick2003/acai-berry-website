@@ -1,9 +1,12 @@
 import { BenefitBar } from "@/components/benefit-bar";
+import { FaqSection } from "@/components/faq-section";
+import { GlowUpdates } from "@/components/glow-updates";
 import { Hero } from "@/components/hero";
+import { HomeTestimonials } from "@/components/home-testimonials";
 import { PromoTicker } from "@/components/promo-ticker";
-import { SiteHeader } from "@/components/site-header";
 import { RitualSteps } from "@/components/ritual-steps";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { WellnessRitual } from "@/components/wellness-ritual";
 
 export default function Home() {
@@ -20,6 +23,9 @@ export default function Home() {
         </div>
         <WellnessRitual />
         <RitualSteps />
+        <HomeTestimonials />
+        <FaqSection />
+        <GlowUpdates />
       </main>
       <SiteFooter />
     </>

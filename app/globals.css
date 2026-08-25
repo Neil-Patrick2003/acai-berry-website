@@ -51,6 +51,57 @@
      copperplate used for "Perfect Glow". */
   --font-brush: var(--font-kaushan), "Kaushan Script", cursive;
 
+  /* ---- Theme type scale -------------------------------------------------
+     One clamp per role, each tuned to hit the mobile figure at a 390px
+     viewport and the desktop figure at 1440px, and capped so it stays in
+     range on very wide screens:
+
+       h1 35→52px   h2 29→39px   h3 22→26px   h4 18.5→20px
+       body 14.5→16px   body-sm 12.5→13.5px   btn 14→15px   nav 13.5→14.5px
+       announce 9.5→11.5px   price 27→32px   meta 12→13px
+     ------------------------------------------------------------------------ */
+  --text-h1: clamp(2rem, 1.79rem + 1.62vw, 3.25rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.01em;
+
+  --text-h2: clamp(1.625rem, 1.58rem + 0.95vw, 2.45rem);
+  --text-h2--line-height: 1.12;
+
+  --text-h3: clamp(1.25rem, 1.28rem + 0.38vw, 1.625rem);
+  --text-h3--line-height: 1.22;
+
+  --text-h4: clamp(1.0625rem, 1.12rem + 0.14vw, 1.3125rem);
+  --text-h4--line-height: 1.3;
+
+  --text-body: clamp(0.875rem, 0.87rem + 0.14vw, 1.0625rem);
+  --text-body--line-height: 1.6;
+
+  --text-body-sm: clamp(0.75rem, 0.758rem + 0.1vw, 0.875rem);
+  --text-body-sm--line-height: 1.55;
+
+  --text-btn: clamp(0.8125rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-btn--line-height: 1;
+
+  --text-nav: clamp(0.8125rem, 0.82rem + 0.1vw, 0.9375rem);
+  --text-nav--line-height: 1;
+
+  --text-announce: clamp(0.5625rem, 0.5475rem + 0.19vw, 0.75rem);
+  --text-announce--line-height: 1;
+
+  --text-price: clamp(1.5rem, 1.57rem + 0.48vw, 2.25rem);
+  --text-price--line-height: 1.1;
+
+  /* Product card type — title tracks h4, body sits a step under it. */
+  --text-product-title: clamp(1.0625rem, 1.12rem + 0.14vw, 1.3125rem);
+  --text-product-title--line-height: 1.3;
+
+  --text-product-body: clamp(0.8125rem, 0.81rem + 0.14vw, 0.9375rem);
+  --text-product-body--line-height: 1.55;
+
+  /* Reviews, timestamps, badges */
+  --text-meta: clamp(0.6875rem, 0.727rem + 0.1vw, 0.8125rem);
+  --text-meta--line-height: 1.4;
+
   /* Small caps / label type — used by nav, ticker, benefit bar */
   --text-label: 0.8125rem;
   --text-label--line-height: 1;
@@ -229,6 +280,25 @@
       rgb(216 198 156 / 0) 72%
     ),
     linear-gradient(to right, #f2eeec 0%, #f1eae3 55%, #ede5d4 100%);
+}
+
+/* Products page ground: a cool lavender wash at the top that clears to the
+   shell colour by the time the promise strip lands, so the hero, the bundles
+   and the assurances read as one band. */
+@utility bg-glow-ground {
+  background-image:
+    radial-gradient(
+      58% 62% at 88% 6%,
+      rgb(197 172 232 / 0.34) 0%,
+      rgb(197 172 232 / 0.12) 48%,
+      rgb(197 172 232 / 0) 76%
+    ),
+    radial-gradient(
+      52% 50% at 4% 26%,
+      rgb(214 197 240 / 0.28) 0%,
+      rgb(214 197 240 / 0) 70%
+    ),
+    linear-gradient(180deg, #f6f2fc 0%, #faf7fd 34%, #fbfaf9 68%, #f4f3f1 100%);
 }
 
 /* Scroll reveals. The hidden state is server-rendered, so the <noscript> block
