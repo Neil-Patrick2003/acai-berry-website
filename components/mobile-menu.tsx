@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { MenuIcon, PlusIcon, SearchIcon } from "@/components/icons";
+import { MenuIcon, PlusIcon } from "@/components/icons";
 import { NAV_LINKS, isActive } from "@/components/nav-links";
+import { SearchForm } from "@/components/search-form";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -95,27 +96,15 @@ export function MobileMenu() {
             </button>
           </div>
 
-          <form role="search" action="/search" className="px-5">
-            <label htmlFor="mobile-search" className="sr-only">
-              Search products
-            </label>
-            <div className="relative">
-              <input
-                id="mobile-search"
-                name="q"
-                type="search"
-                placeholder="SEARCH"
-                className="h-12 w-full rounded-full border border-brand-600/60 bg-white/60 pr-12 pl-5 text-body-sm tracking-wide text-brand-700 uppercase placeholder:text-brand-700/70 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
-              />
-              <button
-                type="submit"
-                aria-label="Search"
-                className="absolute top-1/2 right-1.5 grid size-10 -translate-y-1/2 place-items-center rounded-full text-brand-700"
-              >
-                <SearchIcon className="size-[18px]" />
-              </button>
-            </div>
-          </form>
+          {/* text-base: mobile Safari zooms the page in on focus below 16px,
+              and this is the only search on a phone. */}
+          <SearchForm
+            id="mobile-search"
+            placeholder="Pouch or bundle…"
+            formClassName="px-5"
+            inputClassName="h-12 w-full rounded-full border border-brand-600/60 bg-white/60 pr-12 pl-5 text-base tracking-wide text-brand-700 uppercase placeholder:text-brand-700/70 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
+            buttonClassName="absolute top-1/2 right-1.5 grid size-10 -translate-y-1/2 place-items-center rounded-full text-brand-700"
+          />
 
           <nav aria-label="Mobile" className="mt-2 px-2">
             <ul className="flex flex-col">

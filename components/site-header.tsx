@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { CartLink } from "@/components/cart-link";
-import { LeafIcon, SearchIcon } from "@/components/icons";
+import { LeafIcon } from "@/components/icons";
 import { MobileMenu } from "@/components/mobile-menu";
+import { SearchForm } from "@/components/search-form";
 import { SiteNav } from "@/components/site-nav";
 
 export function SiteHeader() {
@@ -21,31 +22,13 @@ export function SiteHeader() {
 
         <SiteNav />
 
-        <form
-          role="search"
-          action="/search"
-          className="ml-auto hidden max-w-xs flex-1 md:block lg:max-w-sm"
-        >
-          <label htmlFor="site-search" className="sr-only">
-            Search products
-          </label>
-          <div className="relative">
-            <input
-              id="site-search"
-              name="q"
-              type="search"
-              placeholder="Search for products…"
-              className="h-11 w-full rounded-full border border-brand-600/40 bg-white/70 pr-12 pl-5 text-body-sm text-brand-700 placeholder:text-brand-700/50 focus:border-brand-600 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
-            />
-            <button
-              type="submit"
-              aria-label="Search"
-              className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-brand-700 transition-colors hover:bg-brand-700/10"
-            >
-              <SearchIcon className="size-[18px]" />
-            </button>
-          </div>
-        </form>
+        <SearchForm
+          id="site-search"
+          placeholder="Try “pouch” or “bundle”…"
+          formClassName="ml-auto hidden max-w-xs flex-1 md:block lg:max-w-sm"
+          inputClassName="h-11 w-full rounded-full border border-brand-600/40 bg-white/70 pr-12 pl-5 text-body-sm text-brand-700 placeholder:text-brand-700/50 focus:border-brand-600 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
+          buttonClassName="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-brand-700 transition-colors hover:bg-brand-700/10"
+        />
 
         <div className="ml-auto flex items-center gap-3 md:ml-0 lg:gap-5">
           <CartLink />

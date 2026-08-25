@@ -12,6 +12,12 @@ export type Product = {
   image: string;
   alt: string;
   bestSeller?: boolean;
+  /**
+   * Extra search terms: brand and format words a shopper types but that the
+   * name does not contain. Kept explicit rather than reusing `alt`, whose prose
+   * mentions "pouch"/"sachets" for every bundle and would match everything.
+   */
+  keywords?: string;
   /** Ribbon worn across the top of the card. At most one bundle per tone. */
   badge?: { label: string; tone: "brand" | "gold" };
   inStock: boolean;
@@ -31,6 +37,7 @@ export const PRODUCTS: Product[] = [
     contents: "10 Sachets",
     image: "/products/starter-ritual.png",
     alt: "A pouch of Acai Berry Glow with ten single-serve sachets",
+    keywords: "acai berry glow starter trial single serve sachets 10-day",
     inStock: true,
   },
   {
@@ -41,6 +48,7 @@ export const PRODUCTS: Product[] = [
     contents: "2 Pouches (20 sachets)",
     image: "/products/two-pouch-bundle.png",
     alt: "Two pouches of Acai Berry Glow on a stone tray",
+    keywords: "acai berry glow pouch bundle sachets two",
     bestSeller: true,
     badge: { label: "Most popular", tone: "brand" },
     inStock: true,
@@ -53,6 +61,7 @@ export const PRODUCTS: Product[] = [
     contents: "3 Pouches (30 sachets)",
     image: "/products/three-pouch-bundle.png",
     alt: "Three pouches of Acai Berry Glow arranged on a woven mat",
+    keywords: "acai berry glow pouch bundle sachets three value",
     badge: { label: "Best value", tone: "gold" },
     inStock: true,
   },

@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SearchIcon } from "@/components/icons";
 import { ProductCard } from "@/components/product-card";
 import { PromoTicker } from "@/components/promo-ticker";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { PRODUCTS, searchProducts } from "@/lib/products";
+import { PRODUCTS } from "@/lib/products";
+import { searchSite, type SearchHit } from "@/lib/search";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search the beyou Acai Berry Glow range.",
+  description: "Search the beyou Acai Berry Glow site.",
   // Endless query permutations are a classic source of thin duplicate pages.
   robots: { index: false, follow: true },
 };
@@ -20,13 +20,40 @@ const PRIMARY_BUTTON =
 const SECONDARY_BUTTON =
   "inline-flex h-11 items-center justify-center rounded-full border border-brand-300 px-7 text-btn font-bold tracking-wide text-brand-700 uppercase transition-[colors,transform] hover:bg-brand-100 active:scale-[0.97]";
 
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-sans text-body-sm font-extrabold tracking-[0.12em] text-brand-700 uppercase">
+      {children}
+    </h2>
+  );
+}
+
+function HitList({ hits }: { hits: SearchHit[] }) {
+  return (
+    <ul className="mt-4 flex flex-col gap-3">
+      {hits.map((hit) => (
+        <li key={`${hit.href}-${hit.title}`}>
+          <Link
+            href={hit.href}
+            className="block rounded-2xl bg-white/70 px-5 py-4 transition-colors hover:bg-white"
+          >
+            <p className="font-bold text-brand-700">{hit.title}</p>
+            <p className="mt-1 text-body-sm text-ink-soft">{hit.excerpt}</p>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default async function SearchPage({
   searchParams,
 }: PageProps<"/search">) {
   const { q } = await searchParams;
-  const query = typeof q === "string" ? q : "";
-  const results = query ? searchProducts(query) : [];
-  const showing = query ? results : PRODUCTS;
+  // "   " is not a search: trimming here keeps a whitespace-only URL from
+  // rendering a "nothing matched" page for a blank term.
+  const query = typeof q === "string" ? q.trim() : "";
+  const results = searchSite(query);
 
   return (
     <>
@@ -40,40 +67,13 @@ export default async function SearchPage({
 
           <p className="mt-2 text-body text-ink-soft">
             {query
-              ? `${results.length} ${results.length === 1 ? "product" : "products"} found`
+              ? `${results.total} ${results.total === 1 ? "result" : "results"} across products, pages and answers`
               : "Everything in the range."}
           </p>
 
-          {/* Searching from the page itself, rather than only the header, so the
-              term stays visible and editable after the results load. */}
-          <form role="search" action="/search" className="mt-6 max-w-xl">
-            <label htmlFor="search-page-q" className="sr-only">
-              Search products
-            </label>
-            <div className="relative">
-              <input
-                id="search-page-q"
-                name="q"
-                type="search"
-                // Remounts on navigation so the box reflects the live query
-                // rather than keeping the previously rendered default.
-                key={query}
-                defaultValue={query}
-                placeholder="Try “pouch”, “bundle” or “sachet”…"
-                className="h-12 w-full rounded-full border border-brand-600/40 bg-white/70 pr-12 pl-5 text-body text-brand-700 placeholder:text-brand-700/50 focus:border-brand-600 focus:bg-white focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
-              />
-              <button
-                type="submit"
-                aria-label="Search"
-                className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-brand-700 transition-colors hover:bg-brand-700/10"
-              >
-                <SearchIcon className="size-[18px]" />
-              </button>
-            </div>
-          </form>
 
           {query ? (
-            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-body-sm">
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-body-sm">
               <Link
                 href="/search"
                 className="font-bold text-brand-600 underline underline-offset-4 transition-colors hover:text-brand-700"
@@ -95,7 +95,17 @@ export default async function SearchPage({
             </div>
           ) : null}
 
-          {query && results.length === 0 ? (
+          {!query ? (
+            <ul className="mt-10 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+              {PRODUCTS.map((product, index) => (
+                <li key={product.slug} className="flex">
+                  <Reveal as="div" delay={index * 110} className="flex-1">
+                    <ProductCard product={product} />
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          ) : results.total === 0 ? (
             <div className="mt-10 rounded-3xl bg-lilac/50 px-6 py-10 text-center">
               <p className="font-bold text-brand-700">
                 Nothing matched “{query}”.
@@ -113,15 +123,38 @@ export default async function SearchPage({
               </div>
             </div>
           ) : (
-            <ul className="mt-10 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-              {showing.map((product, index) => (
-                <li key={product.slug} className="flex">
-                  <Reveal as="div" delay={index * 110} className="flex-1">
-                    <ProductCard product={product} />
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-10 flex flex-col gap-12">
+              {results.products.length > 0 ? (
+                <section aria-label="Matching products">
+                  <SectionHeading>
+                    Products ({results.products.length})
+                  </SectionHeading>
+                  <ul className="mt-6 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+                    {results.products.map((product, index) => (
+                      <li key={product.slug} className="flex">
+                        <Reveal as="div" delay={index * 110} className="flex-1">
+                          <ProductCard product={product} />
+                        </Reveal>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+
+              {results.pages.length > 0 ? (
+                <section aria-label="Matching pages">
+                  <SectionHeading>Pages ({results.pages.length})</SectionHeading>
+                  <HitList hits={results.pages} />
+                </section>
+              ) : null}
+
+              {results.faqs.length > 0 ? (
+                <section aria-label="Matching answers">
+                  <SectionHeading>Answers ({results.faqs.length})</SectionHeading>
+                  <HitList hits={results.faqs} />
+                </section>
+              ) : null}
+            </div>
           )}
         </div>
       </main>
