@@ -470,7 +470,9 @@ export function CheckoutForm({ product }: { product: Product | null }) {
       </div>
 
       {/* Order summary */}
-      <aside className="lg:sticky lg:top-6 lg:self-start">
+      {/* Sticky offset clears the sticky header (lg:h-24 = 6rem) plus a 1.5rem
+          gap — at lg:top-6 the summary parked underneath it. */}
+      <aside className="lg:sticky lg:top-30 lg:self-start">
         <div className="rounded-3xl bg-lilac/60 p-5 sm:p-6">
           <h2 className="font-sans text-body-sm font-extrabold tracking-wide text-brand-700 uppercase">
             Order summary
