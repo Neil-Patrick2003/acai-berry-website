@@ -31,6 +31,9 @@ export function NewsletterForm() {
       <label htmlFor="newsletter-email" className="sr-only">
         Email address
       </label>
+      {/* flex-1 is sm-only: while the form stacks, flex-1 would size the
+          input on the block axis and flatten h-13 to nothing. text-base
+          keeps mobile Safari from zooming in on focus (it zooms under 16px). */}
       <input
         id="newsletter-email"
         name="email"
@@ -38,7 +41,7 @@ export function NewsletterForm() {
         autoComplete="email"
         required
         placeholder="Enter your email address"
-        className="h-13 min-w-0 flex-1 rounded-full bg-white px-6 text-body-sm text-brand-700 placeholder:text-brand-700/50 focus:outline-none focus:ring-2 focus:ring-white/70"
+        className="h-13 min-w-0 rounded-full bg-white px-6 text-base text-brand-700 placeholder:text-brand-700/50 focus:outline-none focus:ring-2 focus:ring-white/70 sm:flex-1 sm:text-body-sm"
       />
       <button
         type="submit"

@@ -251,7 +251,7 @@ export function CheckoutForm({ product }: { product: Product | null }) {
           href="/products"
           className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-brand-600 px-8 text-btn font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-700"
         >
-          Shop the range
+          Browse products
         </Link>
       </div>
     );
@@ -470,8 +470,8 @@ export function CheckoutForm({ product }: { product: Product | null }) {
       </div>
 
       {/* Order summary */}
-      {/* Sticky offset clears the sticky header (lg:h-24 = 6rem) plus a 1.5rem
-          gap — at lg:top-6 the summary parked underneath it. */}
+      {/* 7.5rem clears the sticky header (6rem tall at this breakpoint) with a
+          1.5rem gap. A smaller offset parks the summary under the header. */}
       <aside className="lg:sticky lg:top-30 lg:self-start">
         <div className="rounded-3xl bg-lilac/60 p-5 sm:p-6">
           <h2 className="font-sans text-body-sm font-extrabold tracking-wide text-brand-700 uppercase">

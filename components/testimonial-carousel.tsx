@@ -57,7 +57,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <article className="flex w-[17rem] shrink-0 snap-center flex-col overflow-hidden rounded-full bg-lilac sm:w-[19rem]">
+    <article className="relative flex w-[17rem] shrink-0 snap-center flex-col overflow-hidden rounded-full bg-lilac sm:w-[19rem]">
       {item.image ? (
         <Image
           src={item.image}
